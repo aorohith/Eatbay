@@ -1,4 +1,6 @@
+import 'package:dots_indicator/dots_indicator.dart';
 import 'package:eatbay/core/colors.dart';
+import 'package:eatbay/core/dimensions.dart';
 import 'package:eatbay/widgets/big_text.dart';
 import 'package:eatbay/widgets/icon_and_text_widget.dart';
 import 'package:eatbay/widgets/small_text.dart';
@@ -15,7 +17,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
   PageController pageController = PageController(viewportFraction: 0.85);
   var _currentPageValue = 0.0;
   double _scaleFactor = 0.8;
-  double height = 220;
+  double height = Dimensions.pageViewContainer;
 
   @override
   void initState() {
@@ -29,15 +31,94 @@ class _FoodPageBodyState extends State<FoodPageBody> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 250,
-      child: PageView.builder(
-        controller: pageController,
-        itemCount: 5,
-        itemBuilder: (context, index) {
-          return _buildPageItem(index);
-        },
-      ),
+    return Column(
+      children: [
+        SizedBox(
+          height: Dimensions.pageView,
+          child: PageView.builder(
+            controller: pageController,
+            itemCount: 5,
+            itemBuilder: (context, index) {
+              return _buildPageItem(index);
+            },
+          ),
+        ),
+        //dots indicator
+        DotsIndicator(
+          dotsCount: 5,
+          position: _currentPageValue,
+          decorator: DotsDecorator(
+            activeColor: AppColors.mainColor,
+            size: const Size.square(9.0),
+            activeSize: const Size(18.0, 9.0),
+            activeShape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(5.0),
+            ),
+          ),
+        ),
+      const SizedBox(
+              height: 30,
+            ),
+            Container(
+              margin: const EdgeInsets.only(left: 20, right: 20),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  BigText(
+                    text: "Popular",
+                    color: Colors.black,
+                  ),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  SmallText(text: 'Food Ordering'),
+                ],
+              ),
+            ),
+            SizedBox(
+              child: ListView.builder(
+                shrinkWrap: true,
+                physics: NeverScrollableScrollPhysics(),
+                itemCount: 10,
+                itemBuilder: (context, index) {
+                  return Padding(
+                    padding: const EdgeInsets.only(top: 8.0),
+                    child: Container(
+                      margin: const EdgeInsets.only(left: 20, right: 20),
+                      child: Row(
+                        children: [
+                          Container(
+                            height: 120,
+                            width: 120,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              color: Colors.white,
+                              image: const DecorationImage(
+                                fit: BoxFit.cover,
+                                image: NetworkImage(
+                                    'https://img.freepik.com/free-photo/big-hamburger-with-double-beef-french-fries_252907-8.jpg?w=2000'),
+                              ),
+                            ),
+                          ),
+                          Container(
+                            width: 200,
+                            height: 100,
+                            decoration: const BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.only(
+                                topRight: Radius.circular(20),
+                                bottomRight: Radius.circular(20),
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                  );
+                },
+              ),
+            )
+      ],
     );
   }
 
@@ -55,29 +136,26 @@ class _FoodPageBodyState extends State<FoodPageBody> {
       var currTrans = height * (1 - currScale) / 2;
       matrix = Matrix4.diagonal3Values(1, currScale, 1)
         ..setTranslationRaw(0, currTrans, 0);
-      ;
     } else if (index == _currentPageValue.floor() - 1) {
       var currScale = 1 - (_currentPageValue - index) * (1 - _scaleFactor);
       var currTrans = height * (1 - currScale) / 2;
       matrix = Matrix4.diagonal3Values(1, currScale, 1)
         ..setTranslationRaw(0, currTrans, 0);
-      ;
     } else {
       var currScale = 0.8;
       matrix = Matrix4.diagonal3Values(1, currScale, 1)
         ..setTranslationRaw(0, height * (1 - _scaleFactor) / 2, 0);
-      var currTrans = height * (1 - currScale) / 2;
     }
     return Transform(
       transform: matrix,
       child: Stack(
         children: [
           Container(
-            height: height,
+            height: Dimensions.pageViewContainer,
             margin: const EdgeInsets.only(left: 5, right: 5),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(30),
-              image: DecorationImage(
+              image: const DecorationImage(
                 image: NetworkImage(
                     "https://img.freepik.com/free-photo/big-hamburger-with-double-beef-french-fries_252907-8.jpg?w=2000"),
                 fit: BoxFit.cover,
@@ -87,17 +165,24 @@ class _FoodPageBodyState extends State<FoodPageBody> {
           Align(
             alignment: Alignment.bottomCenter,
             child: Container(
-              height: 140,
-              margin: EdgeInsets.only(left: 30, right: 30),
+              height: Dimensions.pageViewTextContainer,
+              margin: const EdgeInsets.only(left: 30, right: 30, bottom: 30),
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(30), color: Colors.white),
+                  borderRadius: BorderRadius.circular(30),
+                  color: const Color.fromRGBO(255, 255, 255, 1),
+                  boxShadow: const [
+                    BoxShadow(
+                        color: Color(0xFFe8e8e8),
+                        blurRadius: 5.0,
+                        offset: Offset(0, 5)),
+                  ]),
               child: Padding(
-                padding: const EdgeInsets.all(20.0),
+                padding: const EdgeInsets.only(left:20.0, top: 20,right: 20),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     BigText(text: "Big Burgr"),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
                     Row(
@@ -105,7 +190,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                         Wrap(
                           children: List.generate(
                             5,
-                            (index) => Icon(
+                            (index) => const Icon(
                               Icons.star,
                               color: AppColors.mainColor,
                               size: 15,
@@ -117,9 +202,10 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                       ],
                     ),
                     const SizedBox(
-                      height: 20,
+                      height: 10,
                     ),
                     Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         IconAndTextWidget(
                           icon: Icons.circle_sharp,
@@ -144,13 +230,12 @@ class _FoodPageBodyState extends State<FoodPageBody> {
             ),
           ),
         ],
-      ),
+      ), 
     );
   }
 
   @override
   void dispose() {
-    // TODO: implement dispose
     pageController.dispose();
     super.dispose();
   }
