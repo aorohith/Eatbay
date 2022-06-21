@@ -56,68 +56,100 @@ class _FoodPageBodyState extends State<FoodPageBody> {
             ),
           ),
         ),
-      const SizedBox(
-              height: 30,
-            ),
-            Container(
-              margin: const EdgeInsets.only(left: 20, right: 20),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  BigText(
-                    text: "Popular",
-                    color: Colors.black,
-                  ),
-                  const SizedBox(
-                    width: 10,
-                  ),
-                  SmallText(text: 'Food Ordering'),
-                ],
+        const SizedBox(
+          height: 30,
+        ),
+        Container(
+          margin: const EdgeInsets.only(left: 20, right: 20),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              BigText(
+                text: "Popular",
+                color: Colors.black,
               ),
-            ),
-            SizedBox(
-              child: ListView.builder(
-                shrinkWrap: true,
-                physics: NeverScrollableScrollPhysics(),
-                itemCount: 10,
-                itemBuilder: (context, index) {
-                  return Padding(
-                    padding: const EdgeInsets.only(top: 8.0),
-                    child: Container(
-                      margin: const EdgeInsets.only(left: 20, right: 20),
-                      child: Row(
-                        children: [
-                          Container(
-                            height: 120,
-                            width: 120,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(20),
-                              color: Colors.white,
-                              image: const DecorationImage(
-                                fit: BoxFit.cover,
-                                image: NetworkImage(
-                                    'https://img.freepik.com/free-photo/big-hamburger-with-double-beef-french-fries_252907-8.jpg?w=2000'),
-                              ),
-                            ),
+              const SizedBox(
+                width: 10,
+              ),
+              SmallText(text: 'Food Ordering'),
+            ],
+          ),
+        ),
+        SizedBox(
+          child: ListView.builder(
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            itemCount: 10,
+            itemBuilder: (context, index) {
+              return Padding(
+                padding: const EdgeInsets.only(top: 8.0),
+                child: Container(
+                  margin: const EdgeInsets.only(left: 20, right: 20),
+                  child: Row(
+                    children: [
+                      Container(
+                        height: 120,
+                        width: 120,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          color: Colors.white,
+                          image: const DecorationImage(
+                            fit: BoxFit.cover,
+                            image: NetworkImage(
+                                'https://img.freepik.com/free-photo/big-hamburger-with-double-beef-french-fries_252907-8.jpg?w=2000'),
                           ),
-                          Container(
-                            width: 200,
-                            height: 100,
-                            decoration: const BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.only(
-                                topRight: Radius.circular(20),
-                                bottomRight: Radius.circular(20),
-                              ),
-                            ),
-                          )
-                        ],
+                        ),
                       ),
-                    ),
-                  );
-                },
-              ),
-            )
+                      Container(
+                        width: 200,
+                        height: 100,
+                        decoration: const BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.only(
+                            topRight: Radius.circular(20),
+                            bottomRight: Radius.circular(20),
+                          ),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              BigText(
+                                text: "Fruit Meals",
+                              ),
+                              SmallText(text: "With cheeze"),
+                              Row(
+                                children: [
+                                  IconAndTextWidget(
+                                    icon: Icons.circle,
+                                    iconColor: Colors.orange,
+                                    text: 'Normal',
+                                  ),
+                                  IconAndTextWidget(
+                                    icon: Icons.location_on,
+                                    iconColor: Colors.green,
+                                    text: '5 km',
+                                  ),
+                                  IconAndTextWidget(
+                                    icon: Icons.timelapse,
+                                    iconColor: Colors.red,
+                                    text: '42min',
+                                  )
+                                ],
+                              )
+                            ],
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              );
+            },
+          ),
+        )
       ],
     );
   }
@@ -177,7 +209,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                         offset: Offset(0, 5)),
                   ]),
               child: Padding(
-                padding: const EdgeInsets.only(left:20.0, top: 20,right: 20),
+                padding: const EdgeInsets.only(left: 20.0, top: 20, right: 20),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -230,7 +262,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
             ),
           ),
         ],
-      ), 
+      ),
     );
   }
 
