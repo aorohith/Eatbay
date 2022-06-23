@@ -14,6 +14,6 @@ class AppColors {
   static const iconColor1 = Colors.orange;
   static const iconColor2 = Colors.green;
   static const iconColor3 = Colors.red;
-
+  static const bottomPriceBg = Color.fromARGB(255, 235, 233, 231);  
 }
 
