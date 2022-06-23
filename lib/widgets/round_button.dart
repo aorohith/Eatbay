@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-class StackButton extends StatelessWidget {
+class RoundButton extends StatelessWidget {
   Color color;
   IconData icon;
 
-  StackButton({
+  RoundButton({
     Key? key,
     this.color = const Color(0xffffffff),
     required this.icon,
