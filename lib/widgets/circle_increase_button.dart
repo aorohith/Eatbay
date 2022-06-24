@@ -1,26 +1,25 @@
 import 'package:flutter/material.dart';
 
-class RoundButton extends StatelessWidget {
-  Color color;
+class IncreaseButton extends StatelessWidget {
   IconData icon;
   Color iconColor;
-
-  RoundButton({
+  IncreaseButton({
     Key? key,
-    this.color = const Color(0xffffffff),
     required this.icon,
-    this.iconColor=Colors.white,
+    this.iconColor = Colors.black,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return CircleAvatar(
       radius: 20,
-      backgroundColor: color,
+      backgroundColor: Color(0xff94d500),
       child: IconButton(
+        icon: Icon(
+          icon,
+          color: iconColor,
+        ),
         onPressed: () {},
-        icon: Icon(icon,color:iconColor),
-        splashRadius: 30,
       ),
     );
   }

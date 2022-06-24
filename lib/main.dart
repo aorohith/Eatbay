@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'presentation/recomended_detail/recomended_detail.dart';
+import 'presentation/cart/cart_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const RecomendDetail(),
+      home: const CartScreen(),
       debugShowCheckedModeBanner: false,
     );
   }
