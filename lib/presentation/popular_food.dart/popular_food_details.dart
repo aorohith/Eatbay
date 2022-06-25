@@ -71,7 +71,7 @@ class PopularFoodDetail extends StatelessWidget {
                         CommonButtonText(text: "₹199"),
                         CommonButtonText(text: "Add to Cart")
                       ],
-                    ))
+                    ),),
               ],
             ),
           ),

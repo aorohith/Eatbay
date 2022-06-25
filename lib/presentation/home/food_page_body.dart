@@ -5,6 +5,8 @@ import 'package:eatbay/widgets/big_text.dart';
 import 'package:eatbay/widgets/icon_and_text_widget.dart';
 import 'package:eatbay/widgets/small_text.dart';
 import 'package:flutter/material.dart';
+import '../popular_food.dart/popular_food_details.dart';
+import '../recomended_detail/recomended_detail.dart';
 
 class FoodPageBody extends StatefulWidget {
   const FoodPageBody({Key? key}) : super(key: key);
@@ -82,67 +84,77 @@ class _FoodPageBodyState extends State<FoodPageBody> {
           itemBuilder: (context, index) {
             return Padding(
               padding: const EdgeInsets.only(top: 8.0),
-              child: Container(
-                margin: const EdgeInsets.only(left: 20, right: 20),
-                child: Row(
-                  children: [
-                    Container(
-                      height: 120,
-                      width: 120,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        color: Colors.white,
-                        image: const DecorationImage(
-                          fit: BoxFit.cover,
-                          image: NetworkImage(
-                              'https://img.freepik.com/free-photo/big-hamburger-with-double-beef-french-fries_252907-8.jpg?w=2000'),
-                        ),
-                      ),
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => PopularFoodDetail(),
                     ),
-                    Container(
-                      width: 200,
-                      height: 100,
-                      decoration: const BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.only(
-                          topRight: Radius.circular(20),
-                          bottomRight: Radius.circular(20),
+                  );
+                },
+                child: Container(
+                  margin: const EdgeInsets.only(left: 20, right: 20),
+                  child: Row(
+                    children: [
+                      Container(
+                        height: 120,
+                        width: 120,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          color: Colors.white,
+                          image: const DecorationImage(
+                            fit: BoxFit.cover,
+                            image: NetworkImage(
+                                'https://img.freepik.com/free-photo/big-hamburger-with-double-beef-french-fries_252907-8.jpg?w=2000'),
+                          ),
                         ),
                       ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            BigText(
-                              text: "Fruit Meals",
-                            ),
-                            SmallText(text: "With cheeze"),
-                            Row(
-                              children: [
-                                IconAndTextWidget(
-                                  icon: Icons.circle,
-                                  iconColor: Colors.orange,
-                                  text: 'Normal',
-                                ),
-                                IconAndTextWidget(
-                                  icon: Icons.location_on,
-                                  iconColor: Colors.green,
-                                  text: '5 km',
-                                ),
-                                IconAndTextWidget(
-                                  icon: Icons.timelapse,
-                                  iconColor: Colors.red,
-                                  text: '42min',
-                                )
-                              ],
-                            )
-                          ],
+                      Container(
+                        width: 200,
+                        height: 100,
+                        decoration: const BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.only(
+                            topRight: Radius.circular(20),
+                            bottomRight: Radius.circular(20),
+                          ),
                         ),
-                      ),
-                    )
-                  ],
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              BigText(
+                                text: "Fruit Meals",
+                              ),
+                              SmallText(text: "With cheeze"),
+                              Row(
+                                children: [
+                                  IconAndTextWidget(
+                                    icon: Icons.circle,
+                                    iconColor: Colors.orange,
+                                    text: 'Normal',
+                                  ),
+                                  IconAndTextWidget(
+                                    icon: Icons.location_on,
+                                    iconColor: Colors.green,
+                                    text: '5 km',
+                                  ),
+                                  IconAndTextWidget(
+                                    icon: Icons.timelapse,
+                                    iconColor: Colors.red,
+                                    text: '42min',
+                                  )
+                                ],
+                              )
+                            ],
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
                 ),
               ),
             );
@@ -178,88 +190,105 @@ class _FoodPageBodyState extends State<FoodPageBody> {
     }
     return Transform(
       transform: matrix,
-      child: Stack(
-        children: [
-          Container(
-            height: Dimensions.pageViewContainer,
-            margin: const EdgeInsets.only(left: 5, right: 5),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(30),
-              image: const DecorationImage(
-                image: NetworkImage(
-                    "https://img.freepik.com/free-photo/big-hamburger-with-double-beef-french-fries_252907-8.jpg?w=2000"),
-                fit: BoxFit.cover,
-              ),
+      child: GestureDetector(
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const RecomendDetail(),
             ),
-          ),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: Container(
-              height: Dimensions.pageViewTextContainer,
-              margin: const EdgeInsets.only(left: 30, right: 30, bottom: 30),
+          );
+        },
+        child: Stack(
+          children: [
+            Container(
+              height: Dimensions.pageViewContainer,
+              margin: const EdgeInsets.only(left: 5, right: 5),
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(30),
-                  color: const Color.fromRGBO(255, 255, 255, 1),
-                  boxShadow: const [
-                    BoxShadow(
-                        color: Color(0xFFe8e8e8),
-                        blurRadius: 5.0,
-                        offset: Offset(0, 5)),
-                  ]),
-              child: Padding(
-                padding: const EdgeInsets.only(left: 20.0, top: 20, right: 20),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    BigText(text: "Big Burgr"),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    Row(
-                      children: [
-                        Wrap(
-                          children: List.generate(
-                            5,
-                            (index) => const Icon(
-                              Icons.star,
-                              color: AppColors.mainColor,
-                              size: 15,
-                            ),
-                          ),
-                        ),
-                        SmallText(text: '4.5'),
-                        SmallText(text: "1255 comments"),
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        IconAndTextWidget(
-                          icon: Icons.circle_sharp,
-                          iconColor: AppColors.iconColor1,
-                          text: "Normal",
-                        ),
-                        IconAndTextWidget(
-                          icon: Icons.location_on,
-                          iconColor: AppColors.iconColor2,
-                          text: "2.0km",
-                        ),
-                        IconAndTextWidget(
-                          icon: Icons.timelapse_rounded,
-                          iconColor: AppColors.iconColor3,
-                          text: "20 min",
-                        ),
-                      ],
-                    )
-                  ],
+                borderRadius: BorderRadius.circular(30),
+                image: const DecorationImage(
+                  image: NetworkImage(
+                      "https://img.freepik.com/free-photo/big-hamburger-with-double-beef-french-fries_252907-8.jpg?w=2000"),
+                  fit: BoxFit.cover,
                 ),
               ),
             ),
-          ),
-        ],
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: Container(
+                height: Dimensions.pageViewTextContainer,
+                margin: const EdgeInsets.only(left: 30, right: 30, bottom: 30),
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(30),
+                    color: const Color.fromRGBO(255, 255, 255, 1),
+                    boxShadow: const [
+                      BoxShadow(
+                          color: Color(0xFFe8e8e8),
+                          blurRadius: 5.0,
+                          offset: Offset(0, 5)),
+                    ]),
+                child: Padding(
+                  padding:
+                      const EdgeInsets.only(left: 20.0, top: 20, right: 20),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      BigText(text: "Big Burgr"),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Row(
+                        children: [
+                          Wrap(
+                            children: List.generate(
+                              5,
+                              (index) => const Icon(
+                                Icons.star,
+                                color: AppColors.mainColor,
+                                size: 15,
+                              ),
+                            ),
+                          ),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          SmallText(text: '4.5'),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          SmallText(text: "1255 comments"),
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          IconAndTextWidget(
+                            icon: Icons.circle_sharp,
+                            iconColor: AppColors.iconColor1,
+                            text: "Normal",
+                          ),
+                          IconAndTextWidget(
+                            icon: Icons.location_on,
+                            iconColor: AppColors.iconColor2,
+                            text: "2.0km",
+                          ),
+                          IconAndTextWidget(
+                            icon: Icons.timelapse_rounded,
+                            iconColor: AppColors.iconColor3,
+                            text: "20 min",
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

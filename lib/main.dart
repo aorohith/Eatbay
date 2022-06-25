@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'presentation/cart/cart_screen.dart';
+
+import 'presentation/bottom_nav_bar/bottom_nav.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const CartScreen(),
+      home: const BottomNavScreen(),
       debugShowCheckedModeBanner: false,
     );
   }
