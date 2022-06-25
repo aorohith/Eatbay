@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import '../../core/colors.dart';
 import '../../widgets/icon_text_filed.dart';
+import '../../widgets/signin_button.dart';
 
 class SignupPage extends StatelessWidget {
   const SignupPage({Key? key}) : super(key: key);
@@ -31,24 +32,7 @@ class SignupPage extends StatelessWidget {
             IconTextFiield(
                 icon: Icons.perm_phone_msg_rounded, hintText: "Phone"),
             IconTextFiield(icon: Icons.person, hintText: "Name"),
-            Container(
-              height: 50,
-              width: 130,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(15),
-                color: AppColors.mainColor,
-              ),
-              child: const Center(
-                child: Text(
-                  "Sign UP",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 30,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-            ),
+            LoginButton(text: "Sign UP",),
             const SizedBox(height: 10,),
             BigText(text:"Have an account?",size: 20,),
             const SizedBox(height: 30,),
@@ -89,3 +73,5 @@ class SignupPage extends StatelessWidget {
     );
   }
 }
+
+

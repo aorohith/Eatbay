@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import 'presentation/bottom_nav_bar/bottom_nav.dart';
+import 'presentation/orders_screen.dart/orders_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,7 +16,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const BottomNavScreen(),
+      home:  MyWidget(),
       debugShowCheckedModeBanner: false,
     );
   }
