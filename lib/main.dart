@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'presentation/address_page/address_page.dart';
 import 'presentation/orders_screen.dart/orders_screen.dart';
 
 void main() {
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home:  MyWidget(),
+      home:  AddressPage(),
       debugShowCheckedModeBanner: false,
     );
   }

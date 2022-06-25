@@ -4,8 +4,10 @@ import '../core/colors.dart';
 
 class LoginButton extends StatelessWidget {
   String text;
-   LoginButton({
+  double textSize;
+  LoginButton({
     Key? key,
+    this.textSize = 30,
     required this.text,
   }) : super(key: key);
 
@@ -18,12 +20,12 @@ class LoginButton extends StatelessWidget {
         borderRadius: BorderRadius.circular(15),
         color: AppColors.mainColor,
       ),
-      child:  Center(
+      child: Center(
         child: Text(
           text,
           style: TextStyle(
             color: Colors.white,
-            fontSize: 30,
+            fontSize: textSize,
             fontWeight: FontWeight.bold,
           ),
         ),
