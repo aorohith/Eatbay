@@ -10,7 +10,7 @@ class DetailImageSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-          color: Colors.red,
+          color: Colors.white,
           height: Dimensions.screenHeight,
           child: Column(
             children: [

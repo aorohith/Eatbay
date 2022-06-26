@@ -9,9 +9,7 @@ class PaymentMethodScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: AppColors.mainColor,
         title: Text("Payment"),
-        centerTitle: true,
       ),
       body: SafeArea(
         child: Column(

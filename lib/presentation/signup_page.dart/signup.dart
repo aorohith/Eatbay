@@ -1,8 +1,8 @@
+import 'package:eatbay/presentation/account_page/profile_page.dart';
 import 'package:eatbay/widgets/big_text.dart';
 import 'package:eatbay/widgets/small_text.dart';
 import 'package:flutter/material.dart';
-
-import '../../core/colors.dart';
+import 'package:get/get.dart';
 import '../../widgets/icon_text_filed.dart';
 import '../../widgets/signin_button.dart';
 
@@ -32,7 +32,9 @@ class SignupPage extends StatelessWidget {
             IconTextFiield(
                 icon: Icons.perm_phone_msg_rounded, hintText: "Phone"),
             IconTextFiield(icon: Icons.person, hintText: "Name"),
-            LoginButton(text: "Sign UP",),
+            LoginButton(text: "Sign UP",onClick: (){
+              Get.to(const ProfilePage());
+            },),
             const SizedBox(height: 10,),
             BigText(text:"Have an account?",size: 20,),
             const SizedBox(height: 30,),

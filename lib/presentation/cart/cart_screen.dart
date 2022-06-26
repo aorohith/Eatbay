@@ -103,19 +103,17 @@ class CartScreen extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           RoundButton(
-            icon: Icons.arrow_back_ios_new,
-            color: AppColors.mainColor,
-          ),
+              icon: Icons.arrow_back_ios_new,
+              color: AppColors.mainColor,
+              onClick: () {}),
           Row(children: [
             RoundButton(
-              icon: Icons.home,
-              color: AppColors.mainColor,
-            ),
-            const SizedBox(width:20),
+                icon: Icons.home, color: AppColors.mainColor, onClick: () {}),
+            const SizedBox(width: 20),
             RoundButton(
-              icon: Icons.shopping_cart,
-              color: AppColors.mainColor,
-            ),
+                icon: Icons.shopping_cart,
+                color: AppColors.mainColor,
+                onClick: () {}),
           ]),
         ],
       ),

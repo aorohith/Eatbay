@@ -1,7 +1,7 @@
+import 'package:eatbay/core/colors.dart';
+import 'package:eatbay/presentation/bottom_nav_bar/bottom_nav.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'presentation/account_page/profile_page.dart';
-import 'presentation/payment_pages/payment_method.dart';
 
 void main() {
   runApp(const MyApp());
@@ -15,12 +15,14 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
+        appBarTheme: AppBarTheme(
+          color: AppColors.mainColor,
+          centerTitle: true,
+        ),
         primarySwatch: Colors.blue,
       ),
-      home:  PaymentMethodScreen(),
+      home: const BottomNavScreen(),
       debugShowCheckedModeBanner: false,
     );
   }
 }
-
-

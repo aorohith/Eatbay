@@ -1,9 +1,11 @@
 import 'package:eatbay/core/colors.dart';
 import 'package:eatbay/widgets/big_text.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../widgets/icon_text_filed.dart';
 import '../../widgets/signin_button.dart';
+import 'pick_location.dart';
 
 class AddressPage extends StatelessWidget {
   const AddressPage({Key? key}) : super(key: key);
@@ -12,27 +14,28 @@ class AddressPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: AppColors.mainColor,
         title: Text("Add Address"),
-        centerTitle: true,
       ),
       body: SafeArea(
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           //map section
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Container(
-              height: 150,
-              width: double.infinity,
-              decoration: BoxDecoration(
-                border: Border.all(color: AppColors.mainColor, width: 2),
-                image: const DecorationImage(
-                    image: NetworkImage(
-                      "https://d32ogoqmya1dw8.cloudfront.net/images/sp/library/google_earth/google_maps_hello_world.jpg",
-                    ),
-                    fit: BoxFit.cover),
+            child: GestureDetector(
+              onTap: (){Get.to(PickLocationScreen());},
+              child: Container(
+                height: 150,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  border: Border.all(color: AppColors.mainColor, width: 2),
+                  image: const DecorationImage(
+                      image: NetworkImage(
+                        "https://d32ogoqmya1dw8.cloudfront.net/images/sp/library/google_earth/google_maps_hello_world.jpg",
+                      ),
+                      fit: BoxFit.cover),
+                ),
               ),
             ),
           ),
@@ -52,13 +55,19 @@ class AddressPage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 BigText(text: "Dellivery Address"),
-                const SizedBox(height: 10,),
+                const SizedBox(
+                  height: 10,
+                ),
                 IconTextFiield(icon: Icons.location_on, hintText: "Address"),
                 BigText(text: "Contact Person Name"),
-                const SizedBox(height: 10,),
+                const SizedBox(
+                  height: 10,
+                ),
                 IconTextFiield(icon: Icons.person, hintText: "Name"),
                 BigText(text: "Contact Person Number"),
-                const SizedBox(height: 10,),
+                const SizedBox(
+                  height: 10,
+                ),
                 IconTextFiield(icon: Icons.phone, hintText: "Phone Number"),
               ],
             ),
@@ -67,6 +76,7 @@ class AddressPage extends StatelessWidget {
           LoginButton(
             text: "Save Address",
             textSize: 20,
+            onClick: () {},
           ),
         ],
       )),

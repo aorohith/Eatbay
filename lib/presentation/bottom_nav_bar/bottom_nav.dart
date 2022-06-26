@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../cart/cart_screen.dart';
 import '../home/main_food_page.dart';
+import '../orders_screen.dart/orders_screen.dart';
 import '../signin_page/signin_page.dart';
 import '../signup_page.dart/signup.dart';
 
@@ -18,9 +19,9 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static const List<Widget> _pages = [
     MainFoodPage(),
-    SignInPage(),
+    OrdersPage(),
     CartScreen(),
-    SignupPage(),
+    SignInPage(),
   ];
 
   void _onItemTapped(int index) {
@@ -46,7 +47,7 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
           
           BottomNavigationBarItem(
             icon: Icon(Icons.offline_pin_sharp),
-            label: 'Offers',
+            label: 'Orders',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.shopping_cart_rounded),

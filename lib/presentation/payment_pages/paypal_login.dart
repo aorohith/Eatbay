@@ -12,9 +12,7 @@ class PaypalLoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: AppColors.mainColor,
         title: const Text("Paypal"),
-        centerTitle: true,
       ),
       body: SafeArea(
         child: Padding(

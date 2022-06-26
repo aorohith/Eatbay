@@ -185,8 +185,8 @@ class PopularFoodDetail extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              RoundButton(icon: Icons.arrow_back_ios_new),
-              RoundButton(icon: Icons.shopping_cart),
+              RoundButton(icon: Icons.arrow_back_ios_new, color:AppColors.mainColor, onClick: (){}),
+              RoundButton(icon: Icons.shopping_cart, color: AppColors.mainColor, onClick: (){}),
             ],
           ),
         );

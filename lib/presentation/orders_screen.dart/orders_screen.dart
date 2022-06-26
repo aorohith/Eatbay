@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 
 import 'history_page.dart';
 
-class MyWidget extends StatelessWidget {
-  const MyWidget({Key? key}) : super(key: key);
+class OrdersPage extends StatelessWidget {
+  const OrdersPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -13,9 +13,7 @@ class MyWidget extends StatelessWidget {
   length: 2,
   child: Scaffold(
     appBar: AppBar(
-      backgroundColor: AppColors.mainColor,
       title: Text('Orders'),
-      centerTitle: true,
       bottom: TabBar(
         tabs: [
           Tab(icon: Text("Running")),

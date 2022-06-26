@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import '../../core/colors.dart';
 import '../../widgets/big_text.dart';
 import '../../widgets/button_text.dart';
 import '../../widgets/detail_image_view.dart';
 import '../../widgets/round_button.dart';
+import '../payment_pages/payment_method.dart';
 
 class RecomendDetail extends StatelessWidget {
   const RecomendDetail({Key? key}) : super(key: key);
@@ -36,8 +38,15 @@ class RecomendDetail extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          RoundButton(icon: Icons.arrow_back_ios_new),
-          RoundButton(icon: Icons.shopping_cart),
+          RoundButton(
+            icon: Icons.arrow_back_ios_new,
+            color: AppColors.mainColor,
+            onClick: () {},
+          ),
+          RoundButton(
+              icon: Icons.shopping_cart,
+              color: AppColors.mainColor,
+              onClick: () {}),
         ],
       ),
     );
@@ -104,6 +113,7 @@ class RecomendDetail extends StatelessWidget {
               RoundButton(
                 icon: Icons.remove,
                 color: AppColors.mainColor,
+                onClick: () {},
               ),
               const Text(
                 "₹299 X 0",
@@ -115,6 +125,7 @@ class RecomendDetail extends StatelessWidget {
               RoundButton(
                 icon: Icons.add,
                 color: AppColors.mainColor,
+                onClick: () {},
               ),
             ],
           ),
@@ -149,19 +160,24 @@ class RecomendDetail extends StatelessWidget {
                     color: AppColors.mainColor,
                   )),
             ),
-            Container(
-              height: 50,
-              width: 130,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(15),
-                color: AppColors.mainColor,
-              ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: const [
-                  CommonButtonText(text: "₹199"),
-                  CommonButtonText(text: "Add to Cart")
-                ],
+            GestureDetector(
+              onTap: (){
+                Get.to(PaymentMethodScreen());
+              },
+              child: Container(
+                height: 50,
+                width: 130,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15),
+                  color: AppColors.mainColor,
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: const [
+                    CommonButtonText(text: "₹199"),
+                    CommonButtonText(text: "Add to Cart")
+                  ],
+                ),
               ),
             )
           ],

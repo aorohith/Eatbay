@@ -26,6 +26,7 @@ class BigText extends StatelessWidget {
           fontWeight: FontWeight.w400,
         )
       ),
+      maxLines: 5,
       );
   }
 }
