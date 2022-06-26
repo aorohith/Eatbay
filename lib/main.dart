@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'presentation/address_page/pick_location.dart';
+import 'presentation/account_page/profile_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home:  PickLocationScreen(),
+      home:  ProfilePage(),
       debugShowCheckedModeBanner: false,
     );
   }
