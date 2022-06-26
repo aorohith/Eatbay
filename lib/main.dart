@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'presentation/account_page/profile_page.dart';
+import 'presentation/payment_pages/payment_method.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home:  ProfilePage(),
+      home:  PaymentMethodScreen(),
       debugShowCheckedModeBanner: false,
     );
   }
