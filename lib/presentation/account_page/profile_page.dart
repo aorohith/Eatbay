@@ -14,24 +14,7 @@ class ProfilePage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-             SizedBox(
-              height: 150,
-              width: 150,
-               child: Stack(
-                 children: [
-                   CircleAvatar(
-                    radius: 70,
-                    child: Icon(
-                      Icons.person,
-                      size: 100,
-                    ),
-                         ),
-                         Align(
-                alignment: Alignment.bottomRight,
-                child: IconButton(onPressed: (){}, icon: Icon(Icons.add_a_photo_rounded,size: 40,)))
-                 ],
-               ),
-             ),
+            topProfilePic(),
             ProfileTiles(icon: Icons.person, text: "Rohith", onClick: () {}),
             ProfileTiles(icon: Icons.phone, text: "9568254895", onClick: () {}),
             ProfileTiles(icon: Icons.mail, text: "asd@dsd.com", onClick: () {}),
@@ -39,13 +22,44 @@ class ProfilePage extends StatelessWidget {
                 icon: Icons.location_on,
                 text: "Fill Address",
                 onClick: () {
-                  Get.to(AddressPage());
+                  Get.to(const AddressPage());
                 }),
-            ProfileTiles(icon: Icons.feedback, text: "Complaints", onClick: () {}),
             ProfileTiles(
-                icon: Icons.exit_to_app, text: "Logout", onClick: () {},color: Colors.red,),
+                icon: Icons.feedback, text: "Complaints", onClick: () {}),
+            ProfileTiles(
+              icon: Icons.exit_to_app,
+              text: "Logout",
+              onClick: () {},
+              color: Colors.red,
+            ),
           ],
         ),
+      ),
+    );
+  }
+
+  SizedBox topProfilePic() {
+    return SizedBox(
+      height: 150,
+      width: 150,
+      child: Stack(
+        children: [
+          const CircleAvatar(
+            radius: 70,
+            child: Icon(
+              Icons.person,
+              size: 100,
+            ),
+          ),
+          Align(
+              alignment: Alignment.bottomRight,
+              child: IconButton(
+                  onPressed: () {},
+                  icon: const Icon(
+                    Icons.add_a_photo_rounded,
+                    size: 40,
+                  )))
+        ],
       ),
     );
   }

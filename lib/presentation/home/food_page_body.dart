@@ -1,5 +1,6 @@
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:eatbay/core/colors.dart';
+import 'package:eatbay/core/constant.dart';
 import 'package:eatbay/core/dimensions.dart';
 import 'package:eatbay/widgets/big_text.dart';
 import 'package:eatbay/widgets/icon_and_text_widget.dart';
@@ -18,7 +19,7 @@ class FoodPageBody extends StatefulWidget {
 class _FoodPageBodyState extends State<FoodPageBody> {
   PageController pageController = PageController(viewportFraction: 0.85);
   var _currentPageValue = 0.0;
-  double _scaleFactor = 0.8;
+  final double _scaleFactor = 0.8;
   double height = Dimensions.pageViewContainer;
 
   @override
@@ -35,16 +36,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        SizedBox(
-          height: Dimensions.pageView,
-          child: PageView.builder(
-            controller: pageController,
-            itemCount: 5,
-            itemBuilder: (context, index) {
-              return _buildPageItem(index);
-            },
-          ),
-        ),
+        topVerticalPageView(),
         //dots indicator
         DotsIndicator(
           dotsCount: 5,
@@ -58,111 +50,30 @@ class _FoodPageBodyState extends State<FoodPageBody> {
             ),
           ),
         ),
-        const SizedBox(
-          height: 30,
-        ),
-        Container(
-          margin: const EdgeInsets.only(left: 20, right: 20),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              BigText(
-                text: "Popular",
-                color: Colors.black,
-              ),
-              const SizedBox(
-                width: 10,
-              ),
-              SmallText(text: 'Food Ordering'),
-            ],
-          ),
-        ),
-        ListView.builder(
-          shrinkWrap: true,
-          physics: const NeverScrollableScrollPhysics(),
-          itemCount: 10,
-          itemBuilder: (context, index) {
-            return Padding(
-              padding: const EdgeInsets.only(top: 8.0),
-              child: GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => PopularFoodDetail(),
-                    ),
-                  );
-                },
-                child: Container(
-                  margin: const EdgeInsets.only(left: 20, right: 20),
-                  child: Row(
-                    children: [
-                      Container(
-                        height: 120,
-                        width: 120,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          color: Colors.white,
-                          image: const DecorationImage(
-                            fit: BoxFit.cover,
-                            image: NetworkImage(
-                                'https://img.freepik.com/free-photo/big-hamburger-with-double-beef-french-fries_252907-8.jpg?w=2000'),
-                          ),
-                        ),
-                      ),
-                      Container(
-                        width: 200,
-                        height: 100,
-                        decoration: const BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.only(
-                            topRight: Radius.circular(20),
-                            bottomRight: Radius.circular(20),
-                          ),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              BigText(
-                                text: "Fruit Meals",
-                              ),
-                              SmallText(text: "With cheeze"),
-                              Row(
-                                children: [
-                                  IconAndTextWidget(
-                                    icon: Icons.circle,
-                                    iconColor: Colors.orange,
-                                    text: 'Normal',
-                                  ),
-                                  IconAndTextWidget(
-                                    icon: Icons.location_on,
-                                    iconColor: Colors.green,
-                                    text: '5 km',
-                                  ),
-                                  IconAndTextWidget(
-                                    icon: Icons.timelapse,
-                                    iconColor: Colors.red,
-                                    text: '42min',
-                                  )
-                                ],
-                              )
-                            ],
-                          ),
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-              ),
-            );
-          },
-        )
+        h30,
+        popularTitle(),
+        popularTiles()
       ],
     );
   }
+
+
+  SizedBox topVerticalPageView() {
+    return SizedBox(
+        height: Dimensions.pageView,
+        child: PageView.builder(
+          controller: pageController,
+          itemCount: 5,
+          itemBuilder: (context, index) {
+            return _buildPageItem(index);
+          },
+        ),
+      );
+  }
+
+  
+
+
 
   Widget _buildPageItem(int index) {
     Matrix4 matrix = Matrix4.identity();
@@ -291,6 +202,112 @@ class _FoodPageBodyState extends State<FoodPageBody> {
         ),
       ),
     );
+  }
+
+   Container popularTitle() {
+    return Container(
+        margin: const EdgeInsets.only(left: 20, right: 20),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
+            BigText(
+              text: "Popular",
+              color: Colors.black,
+            ),
+            const SizedBox(
+              width: 10,
+            ),
+            SmallText(text: 'Food Ordering'),
+          ],
+        ),
+      );
+  }
+
+
+  ListView popularTiles() {
+    return ListView.builder(
+        shrinkWrap: true,
+        physics: const NeverScrollableScrollPhysics(),
+        itemCount: 10,
+        itemBuilder: (context, index) {
+          return Padding(
+            padding: const EdgeInsets.only(top: 8.0),
+            child: GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => PopularFoodDetail(),
+                  ),
+                );
+              },
+              child: Container(
+                margin: const EdgeInsets.only(left: 20, right: 20),
+                child: Row(
+                  children: [
+                    Container(
+                      height: 120,
+                      width: 120,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        color: Colors.white,
+                        image: const DecorationImage(
+                          fit: BoxFit.cover,
+                          image: NetworkImage(
+                              'https://img.freepik.com/free-photo/big-hamburger-with-double-beef-french-fries_252907-8.jpg?w=2000'),
+                        ),
+                      ),
+                    ),
+                    Container(
+                      width: 200,
+                      height: 100,
+                      decoration: const BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.only(
+                          topRight: Radius.circular(20),
+                          bottomRight: Radius.circular(20),
+                        ),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            BigText(
+                              text: "Fruit Meals",
+                            ),
+                            SmallText(text: "With cheeze"),
+                            Row(
+                              children: [
+                                IconAndTextWidget(
+                                  icon: Icons.circle,
+                                  iconColor: Colors.orange,
+                                  text: 'Normal',
+                                ),
+                                IconAndTextWidget(
+                                  icon: Icons.location_on,
+                                  iconColor: Colors.green,
+                                  text: '5 km',
+                                ),
+                                IconAndTextWidget(
+                                  icon: Icons.timelapse,
+                                  iconColor: Colors.red,
+                                  text: '42min',
+                                )
+                              ],
+                            )
+                          ],
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            ),
+          );
+        },
+      );
   }
 
   @override

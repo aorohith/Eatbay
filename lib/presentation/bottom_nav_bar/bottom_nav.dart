@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-
 import '../cart/cart_screen.dart';
 import '../home/main_food_page.dart';
 import '../orders_screen.dart/orders_screen.dart';
 import '../signin_page/signin_page.dart';
-import '../signup_page.dart/signup.dart';
 
 class BottomNavScreen extends StatefulWidget {
   const BottomNavScreen({Key? key}) : super(key: key);
@@ -15,8 +13,6 @@ class BottomNavScreen extends StatefulWidget {
 
 class _BottomNavScreenState extends State<BottomNavScreen> {
   int _selectedIndex = 0;
-  static const TextStyle optionStyle =
-      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static const List<Widget> _pages = [
     MainFoodPage(),
     OrdersPage(),

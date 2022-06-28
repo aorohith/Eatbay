@@ -11,21 +11,14 @@ class SelectAddressScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Select Address"),
+        title: const Text("Select Address"),
       ),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(10),
           child: Column(
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  AddressIcons(icon: Icons.home,color: AppColors.mainColor,),
-                  AddressIcons(icon: Icons.location_on),
-                  AddressIcons(icon: Icons.work),
-                ],
-              ),
+              topAddressTypeButton(),
               h20,
               selectAddressCards(),
               selectAddressCards(color: AppColors.mainColor),
@@ -38,6 +31,17 @@ class SelectAddressScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Row topAddressTypeButton() {
+    return Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                AddressIcons(icon: Icons.home,color: AppColors.mainColor,),
+                AddressIcons(icon: Icons.location_on),
+                AddressIcons(icon: Icons.work),
+              ],
+            );
   }
 
   Card selectAddressCards({Color color = Colors.white}) {

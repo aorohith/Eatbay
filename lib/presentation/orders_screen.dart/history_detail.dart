@@ -9,7 +9,7 @@ class HistoryDetailPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Order Summary"),
+        title: const Text("Order Summary"),
       ),
       body: SafeArea(
         child: Padding(
@@ -19,13 +19,13 @@ class HistoryDetailPage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               BigText(text: "Old Madras Bites"),
-              Text("48, Enfield Avenue 3rd Street, Ambedkar Salai, Chennai"),
-              Divider(),
+              const Text("48, Enfield Avenue 3rd Street, Ambedkar Salai, Chennai"),
+              const Divider(),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                 SmallText(text: "This order was delivered"),
-                TextButton(onPressed: (){}, child: Text("Buy Again")),
+                TextButton(onPressed: (){}, child: const Text("Buy Again")),
               ],),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -33,50 +33,50 @@ class HistoryDetailPage extends StatelessWidget {
                   BigText(text: 'Your Order'),
                   IconButton(
                     onPressed: () {},
-                    icon: Icon(
+                    icon: const Icon(
                       Icons.favorite,
                       color: Colors.red,
                     ),
                   ),
                 ],
               ),
-              Divider(),
+              const Divider(),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text("PineApple juice X 2"),
-                  Text("₹80"),
+                  const Text("PineApple juice X 2"),
+                  const Text("₹80"),
                 ],
               ),
-              Divider(),
+              const Divider(),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text("Orange juice X 2"),
-                  Text("₹80"),
+                  const Text("Orange juice X 2"),
+                  const Text("₹80"),
                 ],
               ),
-              Divider(),
+              const Divider(),
               Row(
                 children: [
-                  Text("Items in total"),
-                  Text("₹160"),
+                  const Text("Items in total"),
+                  const Text("₹160"),
                 ],
               ),
               Row(
-                children: [Text("Delivery Charge"), Text("₹20")],
+                children: [const Text("Delivery Charge"), const Text("₹20")],
               ),
-              Divider(),
+              const Divider(),
               Row(
-                children: [Text("Grand Total"), Text("₹180")],
+                children: [const Text("Grand Total"), const Text("₹180")],
               ),
-              Divider(),
+              const Divider(),
               BigText(
                 text: "Order Details",
               ),
-              Divider(),
+              const Divider(),
               SmallText(text: "Order Number"),
-              Text("1054555"),
+              const Text("1054555"),
             ],
           ),
         ),

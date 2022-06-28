@@ -15,76 +15,87 @@ class AddressPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Add Address"),
+        title: const Text("Add Address"),
       ),
       body: SafeArea(
-          child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            //map section
+            topAddressMapSection(),
+            //button row
+            addressTypeButtons(),
+            //Input field
+            bottomTextFields(),
+            //submit button
+            LoginButton(
+              text: "Save Address",
+              textSize: 20,
+              onClick: () {},
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Padding bottomTextFields() {
+    return Padding(
+      padding: const EdgeInsets.only(left: 8.0, right: 8),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          //map section
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: GestureDetector(
-              onTap: () {
-                Get.to(PickLocationScreen());
-              },
-              child: Container(
-                height: 150,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  border: Border.all(color: AppColors.mainColor, width: 2),
-                  image: const DecorationImage(
-                      image: NetworkImage(
-                        "https://d32ogoqmya1dw8.cloudfront.net/images/sp/library/google_earth/google_maps_hello_world.jpg",
-                      ),
-                      fit: BoxFit.cover),
-                ),
-              ),
-            ),
+          BigText(text: "Dellivery Address"),
+          const SizedBox(
+            height: 10,
           ),
-          //button row
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              AddressIcons(icon: Icons.home, color: AppColors.mainColor),
-              AddressIcons(icon: Icons.work),
-              AddressIcons(icon: Icons.location_on),
-            ],
+          IconTextFiield(icon: Icons.location_on, hintText: "Address"),
+          BigText(text: "Contact Person Name"),
+          const SizedBox(
+            height: 10,
           ),
-          //Input field
-          Padding(
-            padding: const EdgeInsets.only(left: 8.0, right: 8),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                BigText(text: "Dellivery Address"),
-                const SizedBox(
-                  height: 10,
-                ),
-                IconTextFiield(icon: Icons.location_on, hintText: "Address"),
-                BigText(text: "Contact Person Name"),
-                const SizedBox(
-                  height: 10,
-                ),
-                IconTextFiield(icon: Icons.person, hintText: "Name"),
-                BigText(text: "Contact Person Number"),
-                const SizedBox(
-                  height: 10,
-                ),
-                IconTextFiield(icon: Icons.phone, hintText: "Phone Number"),
-              ],
-            ),
+          IconTextFiield(icon: Icons.person, hintText: "Name"),
+          BigText(text: "Contact Person Number"),
+          const SizedBox(
+            height: 10,
           ),
-          //submit button
-          LoginButton(
-            text: "Save Address",
-            textSize: 20,
-            onClick: () {},
-          ),
+          IconTextFiield(icon: Icons.phone, hintText: "Phone Number"),
         ],
-      )),
+      ),
+    );
+  }
+
+  Row addressTypeButtons() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      children: [
+        AddressIcons(icon: Icons.home, color: AppColors.mainColor),
+        AddressIcons(icon: Icons.work),
+        AddressIcons(icon: Icons.location_on),
+      ],
+    );
+  }
+
+  Padding topAddressMapSection() {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: GestureDetector(
+        onTap: () {
+          Get.to(const PickLocationScreen());
+        },
+        child: Container(
+          height: 150,
+          width: double.infinity,
+          decoration: BoxDecoration(
+            border: Border.all(color: AppColors.mainColor, width: 2),
+            image: const DecorationImage(
+                image: NetworkImage(
+                  "https://d32ogoqmya1dw8.cloudfront.net/images/sp/library/google_earth/google_maps_hello_world.jpg",
+                ),
+                fit: BoxFit.cover),
+          ),
+        ),
+      ),
     );
   }
 }
-
-
