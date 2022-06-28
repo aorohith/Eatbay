@@ -10,6 +10,7 @@ class AdminComplaintPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: Text("Complaint Ticket"),
       ),
@@ -22,10 +23,16 @@ class AdminComplaintPage extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              _complaintTile(onClick: () {}, text: "Anand H"),
-              SizedBox(
-                height: 10,
+              TextFormField(
+                maxLines: 10,
+                decoration: const InputDecoration(
+                  labelText: "   Your reply is here!!!",
+                  border: OutlineInputBorder(),
+                  contentPadding: EdgeInsets.symmetric(vertical: 25),
+                ),
               ),
+              _complaintTile(onClick: () {}, text: "Anand H"),
+              
               _complaintTile(onClick: () {}, text: "9568655656"),
               _complaintTile(
                   onClick: () {},
@@ -40,15 +47,6 @@ class AdminComplaintPage extends StatelessWidget {
                   _images(),
                   _images(),
                 ],
-              ),
-              TextFormField(
-                maxLines: 10,
-                decoration: InputDecoration(
-                  labelText: "Your reply is here!!!",
-                  labelStyle: TextStyle(),
-                  border: OutlineInputBorder(),
-                  contentPadding: EdgeInsets.symmetric(vertical: 25),
-                ),
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,

@@ -3,6 +3,7 @@ import 'package:eatbay/widgets/big_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../widgets/address_icons.dart';
 import '../../widgets/icon_text_filed.dart';
 import '../../widgets/signin_button.dart';
 import 'pick_location.dart';
@@ -24,7 +25,9 @@ class AddressPage extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: GestureDetector(
-              onTap: (){Get.to(PickLocationScreen());},
+              onTap: () {
+                Get.to(PickLocationScreen());
+              },
               child: Container(
                 height: 150,
                 width: double.infinity,
@@ -43,9 +46,9 @@ class AddressPage extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              addressIcon(icon: Icons.home, color: AppColors.mainColor),
-              addressIcon(icon: Icons.work),
-              addressIcon(icon: Icons.location_on),
+              AddressIcons(icon: Icons.home, color: AppColors.mainColor),
+              AddressIcons(icon: Icons.work),
+              AddressIcons(icon: Icons.location_on),
             ],
           ),
           //Input field
@@ -82,19 +85,6 @@ class AddressPage extends StatelessWidget {
       )),
     );
   }
-
-  Container addressIcon({required IconData icon, Color color = Colors.grey}) {
-    return Container(
-      height: 50,
-      width: 60,
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(5),
-      ),
-      child: Icon(
-        icon,
-        color: color,
-      ),
-    );
-  }
 }
+
+

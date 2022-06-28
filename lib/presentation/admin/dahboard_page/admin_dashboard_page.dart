@@ -2,10 +2,13 @@ import 'package:eatbay/core/colors.dart';
 import 'package:eatbay/presentation/admin/admin_settings_page/admin_settings_page.dart';
 import 'package:eatbay/widgets/big_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/semantics.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 import 'package:get/get_rx/src/rx_typedefs/rx_typedefs.dart';
+
+import '../../../widgets/admin_dashboard_tiles.dart';
 
 class AdminDashboardPage extends StatelessWidget {
   const AdminDashboardPage({Key? key}) : super(key: key);
@@ -39,7 +42,7 @@ class AdminDashboardPage extends StatelessWidget {
               SizedBox(
                 height: 10,
               ),
-              _aminDashboardTiles(
+              AdminDashboardTile(
                 icon: Icons.swipe_up_sharp,
                 text: "Total Sails",
                 onClick: () {},
@@ -47,7 +50,7 @@ class AdminDashboardPage extends StatelessWidget {
               SizedBox(
                 height: 10,
               ),
-              _aminDashboardTiles(
+              AdminDashboardTile(
                 icon: Icons.attach_money_rounded,
                 text: "Total Profit",
                 onClick: () {},
@@ -55,7 +58,7 @@ class AdminDashboardPage extends StatelessWidget {
               SizedBox(
                 height: 10,
               ),
-              _aminDashboardTiles(
+              AdminDashboardTile(
                 icon: Icons.supervised_user_circle_sharp,
                 text: "Total Users",
                 onClick: () {},
@@ -63,7 +66,7 @@ class AdminDashboardPage extends StatelessWidget {
               SizedBox(
                 height: 10,
               ),
-              _aminDashboardTiles(
+              AdminDashboardTile(
                 icon: Icons.settings,
                 text: "Settings",
                 trailingText: "",
@@ -77,56 +80,5 @@ class AdminDashboardPage extends StatelessWidget {
       ),
     );
   }
-
-  Widget _aminDashboardTiles({
-    required IconData icon,
-    required String text,
-    required Callback onClick,
-    Color color = AppColors.mainColor,
-    String trailingText = "₹60L",
-  }) {
-    return GestureDetector(
-      onTap: onClick,
-      child: Container(
-        width: double.infinity,
-        height: 80,
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(5),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.only(
-            right: 10,
-            left: 10,
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Row(
-                children: [
-                  CircleAvatar(
-                    backgroundColor: color,
-                    radius: 30,
-                    child: Icon(
-                      icon,
-                      color: Colors.white,
-                    ),
-                  ),
-                  SizedBox(width: 20),
-                  BigText(text: text),
-                ],
-              ),
-              Text(
-                trailingText,
-                style: TextStyle(
-                  fontSize: 22,
-                  fontWeight: FontWeight.bold,
-                ),
-              )
-            ],
-          ),
-        ),
-      ),
-    );
-  }
 }
+
