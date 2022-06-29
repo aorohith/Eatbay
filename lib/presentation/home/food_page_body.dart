@@ -6,6 +6,7 @@ import 'package:eatbay/widgets/big_text.dart';
 import 'package:eatbay/widgets/icon_and_text_widget.dart';
 import 'package:eatbay/widgets/small_text.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import '../popular_food.dart/popular_food_details.dart';
 import '../recomended_detail/recomended_detail.dart';
 
@@ -36,7 +37,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        topVerticalPageView(),
+        topHorizontalPageView(),
         //dots indicator
         DotsIndicator(
           dotsCount: 5,
@@ -58,7 +59,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
   }
 
 
-  SizedBox topVerticalPageView() {
+  SizedBox topHorizontalPageView() {
     return SizedBox(
         height: Dimensions.pageView,
         child: PageView.builder(
@@ -103,12 +104,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
       transform: matrix,
       child: GestureDetector(
         onTap: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const RecomendDetail(),
-            ),
-          );
+          Get.to(const RecomendDetail());
         },
         child: Stack(
           children: [

@@ -1,5 +1,6 @@
 import 'package:eatbay/presentation/home/food_page_body.dart';
 import 'package:eatbay/widgets/big_text.dart';
+import 'package:eatbay/widgets/search.dart';
 import 'package:eatbay/widgets/small_text.dart';
 import 'package:flutter/material.dart';
 
@@ -44,17 +45,7 @@ class _MainFoodPageState extends State<MainFoodPage> {
                         )
                       ],
                     ),
-                    Container(
-                      height: 45,
-                      width: 45,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(15),
-                          color: AppColors.mainColor),
-                      child: const Icon(
-                        Icons.search,
-                        color: Colors.white,
-                      ),
-                    ),
+                    SearchWidget(),
                   ],
                 ),
               ),
@@ -70,3 +61,4 @@ class _MainFoodPageState extends State<MainFoodPage> {
     );
   }
 }
+

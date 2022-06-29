@@ -1,14 +1,10 @@
-import 'package:eatbay/core/colors.dart';
 import 'package:eatbay/presentation/admin/admin_settings_page/admin_settings_page.dart';
+import 'package:eatbay/presentation/admin/admin_users_list_section/admin_users.dart';
 import 'package:eatbay/widgets/big_text.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/semantics.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
-import 'package:get/get_rx/src/rx_typedefs/rx_typedefs.dart';
-
 import '../../../widgets/admin_dashboard_tiles.dart';
+import '../admin_product_section.dart/admin_product_list.dart';
 
 class AdminDashboardPage extends StatelessWidget {
   const AdminDashboardPage({Key? key}) : super(key: key);
@@ -52,16 +48,18 @@ class AdminDashboardPage extends StatelessWidget {
               ),
               AdminDashboardTile(
                 icon: Icons.attach_money_rounded,
-                text: "Total Profit",
-                onClick: () {},
+                text: "Total Users",
+                onClick: () {Get.to(AdminUsersListPage());},
+                trailingText: "80K"
               ),
               SizedBox(
                 height: 10,
               ),
               AdminDashboardTile(
                 icon: Icons.supervised_user_circle_sharp,
-                text: "Total Users",
-                onClick: () {},
+                text: "Total Food Product",
+                onClick: () {Get.to(AdminProductList());},
+                trailingText: "10K",
               ),
               SizedBox(
                 height: 10,
@@ -71,7 +69,7 @@ class AdminDashboardPage extends StatelessWidget {
                 text: "Settings",
                 trailingText: "",
                 onClick: () {
-                  Get.to(AdminSettingsPage());
+                  Get.to(const AdminSettingsPage());
                 },
               )
             ],

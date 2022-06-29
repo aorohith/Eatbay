@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../widgets/profile_tile.dart';
-import '../add_product_page.dart/add_product_page.dart';
+import '../admin_product_section.dart/add_product_page.dart';
 import '../delivery_locations/delivery_locations.dart';
 
 class AdminSettingsPage extends StatelessWidget {
