@@ -1,3 +1,4 @@
+import 'package:eatbay/controllers/bottomnav_controller/bottomnav_binding.dart';
 import 'package:eatbay/views/bottom_nav_bar/bottom_nav.dart';
 import 'package:eatbay/views/widgets/core/colors.dart';
 import 'package:flutter/material.dart';
@@ -26,9 +27,12 @@ class MyApp extends StatelessWidget {
       ),
       initialRoute: '/',
       getPages: [
-        GetPage(name: '/', page: () => BottomNavScreen()),
+        GetPage(
+          name: '/',
+          page: () => BottomNavScreen(),
+          binding: BottomnavBinding(),
+        ),
       ],
-      home: BottomNavScreen(),
       debugShowCheckedModeBanner: false,
     );
   }
