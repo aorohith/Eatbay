@@ -1,5 +1,3 @@
-import 'package:eatbay/controllers/auth_controller.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import '../cart/cart_screen.dart';
 import '../home/main_food_page.dart';
@@ -7,7 +5,7 @@ import '../orders_screen.dart/orders_screen.dart';
 import '../signin_page/signin_page.dart';
 
 class BottomNavScreen extends StatefulWidget {
-  const BottomNavScreen({Key? key}) : super(key: key);
+   BottomNavScreen({Key? key}) : super(key: key);
 
   @override
   State<BottomNavScreen> createState() => _BottomNavScreenState();

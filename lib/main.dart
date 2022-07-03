@@ -24,7 +24,11 @@ class MyApp extends StatelessWidget {
         ),
         primarySwatch: Colors.blue,
       ),
-      home: const BottomNavScreen(),
+      initialRoute: '/',
+      getPages: [
+        GetPage(name: '/', page: () => BottomNavScreen()),
+      ],
+      home: BottomNavScreen(),
       debugShowCheckedModeBanner: false,
     );
   }
