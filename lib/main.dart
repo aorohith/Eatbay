@@ -1,9 +1,12 @@
-import 'package:eatbay/core/colors.dart';
-import 'package:eatbay/presentation/bottom_nav_bar/bottom_nav.dart';
+import 'package:eatbay/views/bottom_nav_bar/bottom_nav.dart';
+import 'package:eatbay/views/widgets/core/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:firebase_core/firebase_core.dart';
 
-void main() {
+Future main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(const MyApp());
 }
 
@@ -16,7 +19,6 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(
         appBarTheme: AppBarTheme(
-          
           color: AppColors.mainColor,
           centerTitle: true,
         ),
