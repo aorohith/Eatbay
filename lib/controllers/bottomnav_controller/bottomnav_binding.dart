@@ -1,8 +1,8 @@
+import 'package:eatbay/controllers/auth_controller/auth_controller.dart';
 import 'package:eatbay/controllers/bottomnav_controller/bottomnav_controller.dart';
 import 'package:eatbay/controllers/cart_controller.dart';
 import 'package:eatbay/controllers/home_controller.dart';
 import 'package:eatbay/controllers/orders_controller.dart';
-import 'package:eatbay/controllers/signin_controller.dart';
 import 'package:get/instance_manager.dart';
 
 class BottomnavBinding extends Bindings{
@@ -12,7 +12,7 @@ class BottomnavBinding extends Bindings{
     Get.lazyPut<HomeController>(() => HomeController());
     Get.lazyPut<OrdersController>(() => OrdersController());
     Get.lazyPut<CartController>(() => CartController());
-    Get.lazyPut<SigninController>(() => SigninController());
+    // Get.lazyPut<AuthController>(() => AuthController());
 
   }
 

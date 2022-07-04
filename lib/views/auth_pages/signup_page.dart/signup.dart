@@ -1,4 +1,4 @@
-import 'package:eatbay/controllers/auth_controller.dart';
+import 'package:eatbay/controllers/auth_controller/auth_controller.dart';
 import 'package:eatbay/views/widgets/big_text.dart';
 import 'package:eatbay/views/widgets/icon_text_filed.dart';
 import 'package:eatbay/views/widgets/signin_button.dart';
@@ -56,9 +56,6 @@ class SignupPage extends StatelessWidget {
                   emailController.text.trim(),
                   passwordController.text.trim(),
                 );
-                AuthController.instance.register(emailController.text.trim(),
-                    passwordController.text.trim());
-                // Get.to(const ProfilePage());
               },
             ),
             const SizedBox(

@@ -1,4 +1,4 @@
-import 'package:eatbay/controllers/auth_controller.dart';
+import 'package:eatbay/controllers/auth_controller/auth_controller.dart';
 import 'package:eatbay/views/widgets/profile_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

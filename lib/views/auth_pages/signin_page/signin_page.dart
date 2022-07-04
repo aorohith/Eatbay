@@ -1,10 +1,11 @@
-import 'package:eatbay/controllers/auth_controller.dart';
-import 'package:eatbay/views/signup_page.dart/signup.dart';
+import 'package:eatbay/controllers/auth_controller/auth_controller.dart';
+import 'package:eatbay/views/auth_pages/signup_page.dart/signup.dart';
 import 'package:eatbay/views/widgets/big_text.dart';
 import 'package:eatbay/views/widgets/core/constant.dart';
 import 'package:eatbay/views/widgets/icon_text_filed.dart';
 import 'package:eatbay/views/widgets/signin_button.dart';
 import 'package:eatbay/views/widgets/small_text.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -46,7 +47,11 @@ class SignInPage extends StatelessWidget {
             LoginButton(
               text: "Sign In",
               onClick: () {
-                AuthController.instance.signin(emailController.text, passwordController.text);
+                AuthController.instance.signin(
+                  emailController.text,
+                  passwordController.text,
+                  FirebaseAuth.instance.currentUser,
+                );
               },
             ),
             const SizedBox(
