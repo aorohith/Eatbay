@@ -13,14 +13,9 @@ class AuthPage extends StatelessWidget {
     // controller.authController.initialScreen(FirebaseAuth.instance.currentUser);
 
     return Scaffold(
-      body: GetBuilder<AuthController>(
-        builder: (controller) {
-          return 
-                  controller.initialScreen(FirebaseAuth.instance.currentUser)
-              ? SignInPage()
-              : ProfilePage();
-        }
-      ),
+      body: GetBuilder<AuthController>(builder: (controller) {
+        return controller.initialScreen(FirebaseAuth.instance.currentUser);
+      }),
     );
   }
 }

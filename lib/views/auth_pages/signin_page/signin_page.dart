@@ -4,6 +4,7 @@ import 'package:eatbay/views/widgets/big_text.dart';
 import 'package:eatbay/views/widgets/core/constant.dart';
 import 'package:eatbay/views/widgets/icon_text_filed.dart';
 import 'package:eatbay/views/widgets/signin_button.dart';
+import 'package:eatbay/views/widgets/signup_or_signin_with.dart';
 import 'package:eatbay/views/widgets/small_text.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -70,7 +71,9 @@ class SignInPage extends StatelessWidget {
                     },
                     child: BigText(text: " Create")),
               ],
-            )
+            ),
+            h30,
+            AuthWithButton(),
           ],
         ),
       ),
