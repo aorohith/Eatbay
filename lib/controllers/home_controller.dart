@@ -9,13 +9,11 @@ class HomeController extends GetxController {
   @override
   void onInit() {
     products.bindStream(getProducts());
-    print("The count is ${products.length}");
     super.onInit();
   }
 
   Stream<List<Product>> getProducts() {
     isLoading = true;
-    print("It called");
     var temp;
     temp = FirebaseFirestore.instance.collection('productlist').snapshots().map(
         (snapshot) =>

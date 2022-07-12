@@ -1,3 +1,4 @@
+import 'package:eatbay/models/product_model.dart';
 import 'package:eatbay/views/widgets/big_text.dart';
 import 'package:eatbay/views/widgets/button_text.dart';
 import 'package:eatbay/views/widgets/core/colors.dart';
@@ -15,7 +16,7 @@ class RecomendDetail extends StatelessWidget {
     return Scaffold(
       body: Stack(children: [
         //image section
-        const DetailImageSection(),
+        DetailImageSection(product: Product(name: "name", price: 55.2, description: "description", imageUrl: 'imageUrl'),),
         //top buttons
         _topButtons(),
         //center descriptioin

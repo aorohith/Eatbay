@@ -1,3 +1,4 @@
+import 'package:eatbay/models/product_model.dart';
 import 'package:eatbay/views/address_page/address_select_section.dart';
 import 'package:eatbay/views/widgets/big_text.dart';
 import 'package:eatbay/views/widgets/button_text.dart';
@@ -10,7 +11,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class PopularFoodDetail extends StatelessWidget {
-  const PopularFoodDetail({Key? key}) : super(key: key);
+  Product product;
+  PopularFoodDetail({
+    Key? key,
+    required this.product,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +23,7 @@ class PopularFoodDetail extends StatelessWidget {
       body: Stack(
         children: [
           //image section
-          const DetailImageSection(),
+          DetailImageSection(product: product),
           //top buttons
           _topButtons(),
           //center descriptioin
@@ -49,7 +54,7 @@ class PopularFoodDetail extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               BigText(
-                text: "Biriyani",
+                text: product.name,
                 size: 25,
               ),
               const SizedBox(
@@ -109,11 +114,10 @@ class PopularFoodDetail extends StatelessWidget {
               const SizedBox(
                 height: 15,
               ),
-              const Expanded(
+               Expanded(
                 child: SizedBox(
-                  child: Text(
-                    "Typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-                    style: TextStyle(
+                  child: Text( product.description,
+                    style: const TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w400,
                     ),
@@ -181,7 +185,7 @@ class PopularFoodDetail extends StatelessWidget {
                   ]),
             ),
             GestureDetector(
-              onTap: (){
+              onTap: () {
                 Get.to(SelectAddressScreen());
               },
               child: Container(

@@ -210,7 +210,6 @@ class _FoodPageBodyState extends State<FoodPageBody> {
           const SizedBox(
             width: 10,
           ),
-          SmallText(text: 'Food Ordering'),
         ],
       ),
     );
@@ -235,7 +234,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => PopularFoodDetail(),
+                      builder: (context) => PopularFoodDetail(product: product,),
                     ),
                   );
                 },

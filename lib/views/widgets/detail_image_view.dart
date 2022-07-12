@@ -1,9 +1,12 @@
+import 'package:eatbay/models/product_model.dart';
 import 'package:eatbay/views/widgets/core/dimensions.dart';
 import 'package:flutter/material.dart';
 
 class DetailImageSection extends StatelessWidget {
-  const DetailImageSection({
+    Product product;
+  DetailImageSection({
     Key? key,
+    required this.product
   }) : super(key: key);
 
   @override
@@ -15,10 +18,10 @@ class DetailImageSection extends StatelessWidget {
             children: [
               Container(
                 height: 350,
-                decoration: const BoxDecoration(
+                decoration: BoxDecoration(
                   image: DecorationImage(
                       image: NetworkImage(
-                        "https://www.hungryforever.com/wp-content/uploads/2015/11/feature-image-gulab-jamun-1280x720.jpg",
+                        product.imageUrl,
                       ),
                       fit: BoxFit.cover),
                 ),
