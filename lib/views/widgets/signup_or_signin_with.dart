@@ -24,9 +24,14 @@ class AuthWithButton extends StatelessWidget {
           url:
               'https://www.kindpng.com/picc/m/225-2252495_logo-twitter-bulat-clipart-png-download-square-twitter.png',
         ),
-        _signupWithIcon(
-          url:
-              'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT3zM12PHwwSmEbr9VQGaWngPxLt5bb1G5NWQ&usqp=CAU',
+        GestureDetector(
+          onTap: (){
+            AuthController.instance.signinWithFacebook();
+          },
+          child: _signupWithIcon(
+            url:
+                'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT3zM12PHwwSmEbr9VQGaWngPxLt5bb1G5NWQ&usqp=CAU',
+          ),
         ),
       ],
     );

@@ -34,6 +34,7 @@ dependencies:
   firebase_core: ^1.19.0
   flutter:
     sdk: flutter
+  flutter_facebook_auth: ^4.4.0
   flutter_form_builder: ^7.3.1
   get: ^4.6.5
   google_fonts: ^3.0.1

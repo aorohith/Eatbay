@@ -1,10 +1,10 @@
 import 'package:eatbay/views/account_page/profile_page.dart';
 import 'package:eatbay/views/auth_pages/signin_page/signin_page.dart';
-import 'package:eatbay/views/bottom_nav_bar/bottom_nav.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 
 class AuthController extends GetxController {
   static AuthController instance = Get.find();
@@ -71,6 +71,34 @@ class AuthController extends GetxController {
     await FirebaseAuth.instance.signInWithCredential(credential);
     // Get.offAll(BottomNavScreen());
     update();
+  }
+
+  signinWithFacebook() async {
+    print("rrrrrrrrrrrrr");
+//     final LoginResult result = await FacebookAuth.instance
+//         .login(); // by default we request the email and the public profile
+// // or FacebookAuth.i.login()
+//     if (result.status == LoginStatus.success) {
+//       // you are logged
+//       final AccessToken accessToken = result.accessToken!;
+//     } else {
+//       print(result.status);
+//       print(result.message);
+//     }
+
+    try {
+      // Trigger the sign-in flow
+      await FacebookAuth.instance.login().then((value) async {
+        final OAuthCredential facebookAuthCredential =
+            FacebookAuthProvider.credential(value.accessToken!.token);
+        print(facebookAuthCredential);
+        // Create a credential from the access token
+
+        // Once signed in, return the UserCredential
+        await FirebaseAuth.instance
+            .signInWithCredential(facebookAuthCredential);
+      });
+    } catch (e) {}
   }
 
   void logout() {
