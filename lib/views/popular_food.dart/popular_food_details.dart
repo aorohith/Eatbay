@@ -1,3 +1,5 @@
+import 'package:eatbay/controllers/home_controller.dart';
+import 'package:eatbay/models/cart_model.dart';
 import 'package:eatbay/models/product_model.dart';
 import 'package:eatbay/views/address_page/address_select_section.dart';
 import 'package:eatbay/views/widgets/big_text.dart';
@@ -7,6 +9,7 @@ import 'package:eatbay/views/widgets/detail_image_view.dart';
 import 'package:eatbay/views/widgets/icon_and_text_widget.dart';
 import 'package:eatbay/views/widgets/round_button.dart';
 import 'package:eatbay/views/widgets/small_text.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -17,6 +20,7 @@ class PopularFoodDetail extends StatelessWidget {
     required this.product,
   }) : super(key: key);
 
+  final homeController = Get.put(HomeController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -114,9 +118,10 @@ class PopularFoodDetail extends StatelessWidget {
               const SizedBox(
                 height: 15,
               ),
-               Expanded(
+              Expanded(
                 child: SizedBox(
-                  child: Text( product.description,
+                  child: Text(
+                    product.description,
                     style: const TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w400,
@@ -175,32 +180,51 @@ class PopularFoodDetail extends StatelessWidget {
               ),
               child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: const [
-                    Text(
-                      '+',
-                      style: TextStyle(fontSize: 20),
+                  children: [
+                    GestureDetector(
+                      onTap: () => homeController.quantity.value++,
+                      child: Text(
+                        '+',
+                        style: TextStyle(fontSize: 20),
+                      ),
                     ),
-                    Text("1", style: TextStyle(fontSize: 20)),
-                    Text('-', style: TextStyle(fontSize: 25)),
+                    Obx(() => Text(homeController.quantity.value.toString(),
+                        style: TextStyle(fontSize: 20))),
+                    GestureDetector(
+                        onTap: () => homeController.quantity.value--,
+                        child: Text('-', style: TextStyle(fontSize: 25))),
                   ]),
             ),
             GestureDetector(
               onTap: () {
                 Get.to(SelectAddressScreen());
               },
-              child: Container(
-                height: 50,
-                width: 130,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15),
-                  color: AppColors.mainColor,
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: const [
-                    CommonButtonText(text: "₹199"),
-                    CommonButtonText(text: "Add to Cart")
-                  ],
+              child: GestureDetector(
+                onTap: () {
+                  final cart = Cart(
+                    product: product,
+                    quantity: homeController.quantity.value,
+                    totalPrice: homeController.quantity.value * product.price,
+                    userId: FirebaseAuth.instance.currentUser!.uid,
+                  );
+                  homeController.addToCart(cart);
+                },
+                child: Container(
+                  height: 50,
+                  width: 130,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(15),
+                    color: AppColors.mainColor,
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Obx(() => CommonButtonText(
+                          text: (homeController.quantity.value * product.price)
+                              .toString())),
+                      CommonButtonText(text: "Add to Cart")
+                    ],
+                  ),
                 ),
               ),
             ),

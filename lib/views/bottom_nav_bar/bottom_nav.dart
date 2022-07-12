@@ -22,7 +22,7 @@ class BottomNavScreen extends StatelessWidget {
             children: [
               const MainFoodPage(),
               const OrdersPage(),
-              const CartScreen(),
+              CartScreen(),
               AuthPage()
             ],
           )),

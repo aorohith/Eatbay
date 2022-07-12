@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_rx/src/rx_typedefs/rx_typedefs.dart';
 
 class IncreaseButton extends StatelessWidget {
   IconData icon;
+  Callback onClick;
   Color iconColor;
   IncreaseButton({
     Key? key,
     required this.icon,
     this.iconColor = Colors.black,
+    required this.onClick
   }) : super(key: key);
 
   @override
@@ -19,7 +22,7 @@ class IncreaseButton extends StatelessWidget {
           icon,
           color: iconColor,
         ),
-        onPressed: () {},
+        onPressed: onClick,
       ),
     );
   }

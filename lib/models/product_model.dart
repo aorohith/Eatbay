@@ -21,6 +21,7 @@ class Product {
       };
 
   static Product fromJson(Map<String, dynamic> json) => Product(
+        id: json['id'],
         name: json['name'],
         price: json['price'],
         description: json['description'],

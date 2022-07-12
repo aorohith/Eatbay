@@ -74,26 +74,12 @@ class AuthController extends GetxController {
   }
 
   signinWithFacebook() async {
-    print("rrrrrrrrrrrrr");
-//     final LoginResult result = await FacebookAuth.instance
-//         .login(); // by default we request the email and the public profile
-// // or FacebookAuth.i.login()
-//     if (result.status == LoginStatus.success) {
-//       // you are logged
-//       final AccessToken accessToken = result.accessToken!;
-//     } else {
-//       print(result.status);
-//       print(result.message);
-//     }
-
     try {
       // Trigger the sign-in flow
       await FacebookAuth.instance.login().then((value) async {
+        // Create a credential from the access token
         final OAuthCredential facebookAuthCredential =
             FacebookAuthProvider.credential(value.accessToken!.token);
-        print(facebookAuthCredential);
-        // Create a credential from the access token
-
         // Once signed in, return the UserCredential
         await FirebaseAuth.instance
             .signInWithCredential(facebookAuthCredential);

@@ -8,7 +8,7 @@ class BigText extends StatelessWidget {
   TextOverflow overflow;
   BigText({
     Key? key,
-    this.color =  const Color(0xff000000),
+    this.color = const Color(0xff000000),
     required this.text,
     this.size = 20,
     this.overflow = TextOverflow.ellipsis,
@@ -18,15 +18,15 @@ class BigText extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       text,
+      overflow: overflow,
       style: GoogleFonts.roboto(
         textStyle: TextStyle(
           fontSize: size,
-          overflow: overflow,
           color: color,
           fontWeight: FontWeight.w400,
-        )
+        ),
       ),
       maxLines: 5,
-      );
+    );
   }
 }
