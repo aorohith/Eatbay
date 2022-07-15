@@ -6,17 +6,21 @@ import 'package:get/state_manager.dart';
 class CartController extends GetxController {
   bool isLoading = false;
   RxList<Cart> cartProducts = RxList<Cart>([]);
+  bool isInCart = false;
+  bool isCartEmpty = true;
 
   @override
-  void onInit() {
-    cartProducts.bindStream(getCartProducts());
+   onInit() {
+    if(FirebaseAuth.instance.currentUser!=null){
+      cartProducts.bindStream(getCartProducts());
+    }
     super.onInit();
   }
 
   Stream<List<Cart>> getCartProducts() {
     isLoading = true;
     var temp;
-    temp = FirebaseFirestore.instance
+      temp = FirebaseFirestore.instance
         .collection('cartproducts')
         .where('user_id', isEqualTo: FirebaseAuth.instance.currentUser!.uid)
         .snapshots()

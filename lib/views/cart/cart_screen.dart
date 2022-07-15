@@ -1,4 +1,5 @@
 import 'package:eatbay/controllers/cart_controller.dart';
+import 'package:eatbay/controllers/home_controller.dart';
 import 'package:eatbay/models/cart_model.dart';
 import 'package:eatbay/views/widgets/big_text.dart';
 import 'package:eatbay/views/widgets/circle_increase_button.dart';
@@ -20,10 +21,14 @@ class CartScreen extends StatelessWidget {
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.only(left: 10, right: 10),
-          child: Column(
+          child: Stack(
             children: [
-              _topButtons(),
-              listTiles(),
+              Column(
+                children: [
+                  _topButtons(),
+                  listTiles(),
+                ],
+              ),
             ],
           ),
         ),
@@ -32,97 +37,97 @@ class CartScreen extends StatelessWidget {
   }
 
   listTiles() {
-    return Obx(
-      () {
-        if (cartController.isLoading) {
-          return CircularProgressIndicator();
-        } else {
-          return Expanded(
-            child: currentUser == null
-                ? Center(
-                    child: Text(
-                    "Please Login for Cart",
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
-                  ))
-                : ListView.builder(
-                    itemCount: cartController.cartProducts.length,
-                    itemBuilder: (context, index) {
-                      Cart cartProduct = cartController.cartProducts[index];
-                      return SizedBox(
-                        height: 120,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    final cartController = Get.put(CartController());
+
+    if (cartController.isLoading) {
+      return CircularProgressIndicator();
+    } else {
+      return Expanded(
+        child: currentUser == null
+            ? Center(
+                child: Text(
+                "Please Login for Cart",
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
+              ))
+            : ListView.builder(
+                itemCount: cartController.cartProducts.length,
+                itemBuilder: (context, index) {
+                  Cart cartProduct = cartController.cartProducts[index];
+                  return SizedBox(
+                    height: 120,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        //image container
+                        Row(
                           children: [
-                            //image container
-                            Row(
-                              children: [
-                                Container(
-                                  height: 100,
-                                  width: 100,
-                                  decoration: BoxDecoration(
-                                    image: const DecorationImage(
-                                      image: NetworkImage(
-                                        "https://t4.ftcdn.net/jpg/04/36/36/57/360_F_436365754_z3i5Es0sFmZuLY6GZIzdiU01v9HqpGZe.jpg",
-                                      ),
-                                      fit: BoxFit.cover,
-                                    ),
-                                    borderRadius: BorderRadius.circular(15),
+                            Container(
+                              height: 100,
+                              width: 100,
+                              decoration: BoxDecoration(
+                                image: const DecorationImage(
+                                  image: NetworkImage(
+                                    "https://t4.ftcdn.net/jpg/04/36/36/57/360_F_436365754_z3i5Es0sFmZuLY6GZIzdiU01v9HqpGZe.jpg",
                                   ),
+                                  fit: BoxFit.cover,
                                 ),
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Column(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceEvenly,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      SizedBox(
-                                        width: 100,
-                                        height: 20,
-                                        child: BigText(text: cartProduct.userId)),
-                                      SmallText(text: "Spicy"),
-                                      BigText(
-                                        text: '₹ 3568.0',
-                                        color: Colors.red,
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ],
+                                borderRadius: BorderRadius.circular(15),
+                              ),
                             ),
-                            Expanded(
-                              child: Row(
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Column(
                                 mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
+                                    MainAxisAlignment.spaceEvenly,
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  IncreaseButton(
-                                    icon: Icons.remove,
-                                    onClick: () {
-                                      // cartController.getCartProducts();
-                                    },
+                                  SizedBox(
+                                    width: 100,
+                                    height: 20,
+                                    child:
+                                        BigText(text: cartProduct.product.name),
                                   ),
-                                  const Text("2",
-                                      style: TextStyle(
-                                        fontSize: 25,
-                                        fontWeight: FontWeight.bold,
-                                      )),
-                                  IncreaseButton(
-                                    onClick: () {},
-                                    icon: Icons.add,
+                                  SmallText(text: "Spicy"),
+                                  BigText(
+                                    text: '₹ ${cartProduct.totalPrice}',
+                                    color: Colors.red,
                                   ),
                                 ],
                               ),
                             ),
                           ],
                         ),
-                      );
-                    },
-                  ),
-          );
-        }
-      },
-    );
+                        Expanded(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              IncreaseButton(
+                                icon: Icons.remove,
+                                onClick: () {
+                                  // cartController.getCartProducts();
+                                },
+                              ),
+                               Text(cartProduct.quantity.toString(),
+                                  style: TextStyle(
+                                    fontSize: 25,
+                                    fontWeight: FontWeight.bold,
+                                  )),
+                              IncreaseButton(
+                                onClick: () {
+                                  cartProduct.quantity++;
+                                },
+                                icon: Icons.add,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  );
+                },
+              ),
+      );
+    }
   }
 
   Padding _topButtons() {

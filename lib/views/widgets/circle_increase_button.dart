@@ -16,7 +16,7 @@ class IncreaseButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return CircleAvatar(
       radius: 20,
-      backgroundColor: Color(0xff94d500),
+      backgroundColor: Colors.greenAccent,
       child: IconButton(
         icon: Icon(
           icon,

@@ -3,7 +3,7 @@ import 'package:eatbay/models/product_model.dart';
 class Cart {
   String id;
   final Product product;
-  final int quantity;
+  int quantity;
   final String userId;
   final double totalPrice;
 
