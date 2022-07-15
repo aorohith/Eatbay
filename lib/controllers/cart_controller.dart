@@ -6,8 +6,7 @@ import 'package:get/state_manager.dart';
 class CartController extends GetxController {
   bool isLoading = false;
   RxList<Cart> cartProducts = RxList<Cart>([]);
-  bool isInCart = false;
-  bool isCartEmpty = true;
+  late Cart currentCartProduct;
 
   @override
    onInit() {

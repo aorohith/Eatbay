@@ -2,18 +2,17 @@ import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:eatbay/controllers/cart_controller.dart';
-import 'package:eatbay/controllers/services/cart_api/cart_api.dart';
 import 'package:eatbay/controllers/services/cart_api/cart_apis.dart';
 import 'package:eatbay/models/cart_model.dart';
 import 'package:eatbay/models/product_model.dart';
 import 'package:get/get.dart';
 
 class HomeController extends GetxController {
-  final cartController = Get.put(CartController());
   var isLoading = false;
   RxList<Product> products = RxList<Product>([]);
   var quantity = 1.obs;
   final firebaseInstance = FirebaseFirestore.instance;
+  final cartController = Get.put(CartController());
 
   @override
   void onInit() {
@@ -36,16 +35,16 @@ class HomeController extends GetxController {
   addToCart(Cart cart) async {
     isLoading = true;
     try {
-      cartController.isCartEmpty = await checkCartIsEmpty(); //check cart is empty or not for the current user also
-      print(cartController.isCartEmpty);
-      await checkProductIsExist(
-          cart.product.id); //check product is in collection or not?
-        
-      if (cartController.isCartEmpty || !cartController.isInCart) {
-        final docUser = firebaseInstance.collection('cartproducts').doc();
-        cart.id = docUser.id;
+      //check product is in collection or not?
+      bool isEmpty = await checkCartIsEmpty();
+      //check cart is empty or not for the current user also
+      bool isExist = await checkProductIsExist(cart.product.id);
+
+      if (isEmpty || !isExist) {
+        final doc = firebaseInstance.collection('cartproducts').doc();
+        cart.id = doc.id;
         final json = cart.toJson();
-        await docUser.set(json);
+        await doc.set(json);
         Get.snackbar(
           "title",
           "Product Added",
@@ -53,6 +52,13 @@ class HomeController extends GetxController {
         );
       } else {
         log("Already exist");
+        final doc = firebaseInstance
+            .collection('cartproducts')
+            .doc(cartController.currentCartProduct.id);
+        doc.update({
+          'quantity':
+              cart.quantity + cartController.currentCartProduct.quantity,
+        });
       }
     } catch (exception) {
       Get.snackbar(
@@ -61,7 +67,7 @@ class HomeController extends GetxController {
         snackPosition: SnackPosition.BOTTOM,
       );
     }
-    // isLoading = false;
+    isLoading = false;
     update();
   }
 
