@@ -35,11 +35,12 @@ checkProductIsExist(String prodId) async {
       return e;
     }
   }).toList();
-  cartController.currentCartProduct = Cart.fromJson(withProdIdList[0]!.data());
-  log(cartController.currentCartProduct.id);
-  if(withProdIdList.isEmpty){
+  if (withProdIdList.isEmpty) {
     return false;
-  }else{
+  } else {
+    cartController.currentCartProduct =
+        Cart.fromJson(withProdIdList[0]!.data());
+    log(cartController.currentCartProduct.id);
     return true;
   }
 }

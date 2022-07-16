@@ -5,7 +5,7 @@ class Cart {
   final Product product;
   int quantity;
   final String userId;
-  final double totalPrice;
+  double totalPrice;
 
   Cart({
     this.id = '',

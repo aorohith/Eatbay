@@ -22,7 +22,7 @@ class HomeController extends GetxController {
 
   Stream<List<Product>> getProducts() {
     isLoading = true;
-    var temp;
+    Stream<List<Product>> temp;
     temp = FirebaseFirestore.instance.collection('productlist').snapshots().map(
         (snapshot) =>
             snapshot.docs.map((doc) => Product.fromJson(doc.data())).toList());
@@ -34,7 +34,7 @@ class HomeController extends GetxController {
 //add product from popular detail section
   addToCart(Cart cart) async {
     isLoading = true;
-    try {
+    // try {
       //check product is in collection or not?
       bool isEmpty = await checkCartIsEmpty();
       //check cart is empty or not for the current user also
@@ -46,8 +46,8 @@ class HomeController extends GetxController {
         final json = cart.toJson();
         await doc.set(json);
         Get.snackbar(
-          "title",
-          "Product Added",
+          "Hurray!!",
+          "Product Added to cart",
           snackPosition: SnackPosition.BOTTOM,
         );
       } else {
@@ -59,14 +59,20 @@ class HomeController extends GetxController {
           'quantity':
               cart.quantity + cartController.currentCartProduct.quantity,
         });
+         Get.snackbar(
+          "Hurray!!",
+          "Product Added to cart",
+          snackPosition: SnackPosition.BOTTOM,
+        );
       }
-    } catch (exception) {
-      Get.snackbar(
-        "title",
-        exception.toString(),
-        snackPosition: SnackPosition.BOTTOM,
-      );
-    }
+    // } catch (exception) {
+    //   Get.snackbar(
+    //     "title",
+    //     exception.toString(),
+    //     snackPosition: SnackPosition.BOTTOM,
+    //   );
+    //   log(exception.toString());
+    // }
     isLoading = false;
     update();
   }

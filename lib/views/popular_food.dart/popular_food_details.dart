@@ -1,7 +1,10 @@
+import 'package:eatbay/controllers/bottomnav_controller/bottomnav_controller.dart';
+import 'package:eatbay/controllers/cart_controller.dart';
 import 'package:eatbay/controllers/home_controller.dart';
 import 'package:eatbay/models/cart_model.dart';
 import 'package:eatbay/models/product_model.dart';
 import 'package:eatbay/views/address_page/address_select_section.dart';
+import 'package:eatbay/views/bottom_nav_bar/bottom_nav.dart';
 import 'package:eatbay/views/widgets/big_text.dart';
 import 'package:eatbay/views/widgets/button_text.dart';
 import 'package:eatbay/views/widgets/core/colors.dart';
@@ -21,6 +24,7 @@ class PopularFoodDetail extends StatelessWidget {
   }) : super(key: key);
 
   final homeController = Get.put(HomeController());
+  final bottomController = Get.put(BottomnavController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -149,11 +153,16 @@ class PopularFoodDetail extends StatelessWidget {
           RoundButton(
               icon: Icons.arrow_back_ios_new,
               color: AppColors.mainColor,
-              onClick: () {}),
+              onClick: () {
+                Get.back();
+              }),
           RoundButton(
               icon: Icons.shopping_cart,
               color: AppColors.mainColor,
-              onClick: () {}),
+              onClick: () {
+                Get.offAll(BottomNavScreen());
+                bottomController.selectedIndex = 2;
+              }),
         ],
       ),
     );

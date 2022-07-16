@@ -1,5 +1,4 @@
 import 'package:eatbay/controllers/cart_controller.dart';
-import 'package:eatbay/controllers/home_controller.dart';
 import 'package:eatbay/models/cart_model.dart';
 import 'package:eatbay/views/widgets/big_text.dart';
 import 'package:eatbay/views/widgets/circle_increase_button.dart';
@@ -27,6 +26,11 @@ class CartScreen extends StatelessWidget {
                 children: [
                   _topButtons(),
                   listTiles(),
+                  Container(
+                    height: 50,
+                    width: 50,
+                    color: Colors.red,
+                  )
                 ],
               ),
             ],
@@ -37,7 +41,7 @@ class CartScreen extends StatelessWidget {
   }
 
   listTiles() {
-    final cartController = Get.put(CartController());
+    // final cartController = Get.put(CartController());
 
     if (cartController.isLoading) {
       return CircularProgressIndicator();
@@ -49,85 +53,93 @@ class CartScreen extends StatelessWidget {
                 "Please Login for Cart",
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
               ))
-            : ListView.builder(
-                itemCount: cartController.cartProducts.length,
-                itemBuilder: (context, index) {
-                  Cart cartProduct = cartController.cartProducts[index];
-                  return SizedBox(
-                    height: 120,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        //image container
-                        Row(
-                          children: [
-                            Container(
-                              height: 100,
-                              width: 100,
-                              decoration: BoxDecoration(
-                                image: const DecorationImage(
-                                  image: NetworkImage(
-                                    "https://t4.ftcdn.net/jpg/04/36/36/57/360_F_436365754_z3i5Es0sFmZuLY6GZIzdiU01v9HqpGZe.jpg",
-                                  ),
-                                  fit: BoxFit.cover,
-                                ),
-                                borderRadius: BorderRadius.circular(15),
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Column(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  SizedBox(
-                                    width: 100,
-                                    height: 20,
-                                    child:
-                                        BigText(text: cartProduct.product.name),
-                                  ),
-                                  SmallText(text: "Spicy"),
-                                  BigText(
-                                    text: '₹ ${cartProduct.totalPrice}',
-                                    color: Colors.red,
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                        Expanded(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              IncreaseButton(
-                                icon: Icons.remove,
-                                onClick: () {
-                                  // cartController.getCartProducts();
-                                },
-                              ),
-                               Text(cartProduct.quantity.toString(),
-                                  style: TextStyle(
-                                    fontSize: 25,
-                                    fontWeight: FontWeight.bold,
-                                  )),
-                              IncreaseButton(
-                                onClick: () {
-                                  cartProduct.quantity++;
-                                },
-                                icon: Icons.add,
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
+            : GetBuilder<CartController>(
+                init: CartController(),
+                initState: (_) {},
+                builder: (cartController) {
+                  return ListView.builder(
+                    itemCount: cartController.cartProducts.length,
+                    itemBuilder: (context, index) {
+                      Cart cartProduct = cartController.cartProducts[index];
+                      return cartContainer(cartProduct);
+                    },
                   );
                 },
               ),
       );
     }
+  }
+
+  SizedBox cartContainer(Cart cartProduct) {
+    return SizedBox(
+      height: 120,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          //image container
+          Row(
+            children: [
+              Container(
+                height: 100,
+                width: 100,
+                decoration: BoxDecoration(
+                  image: const DecorationImage(
+                    image: NetworkImage(
+                      "https://t4.ftcdn.net/jpg/04/36/36/57/360_F_436365754_z3i5Es0sFmZuLY6GZIzdiU01v9HqpGZe.jpg",
+                    ),
+                    fit: BoxFit.cover,
+                  ),
+                  borderRadius: BorderRadius.circular(15),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(
+                      width: 100,
+                      height: 20,
+                      child: BigText(text: cartProduct.product.name),
+                    ),
+                    SmallText(text: "Spicy"),
+                    BigText(
+                      text: '₹ ${cartProduct.totalPrice}',
+                      color: Colors.red,
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+          Expanded(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                IncreaseButton(
+                  icon: Icons.remove,
+                  onClick: () {
+                    cartController.decrementCount(cartProduct);
+                  },
+                ),
+                Text(cartProduct.quantity.toString(),
+                    style: TextStyle(
+                      fontSize: 25,
+                      fontWeight: FontWeight.bold,
+                    )),
+                IncreaseButton(
+                  onClick: () {
+                    cartController.incrementCount(cartProduct);
+                  },
+                  icon: Icons.add,
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
   }
 
   Padding _topButtons() {
@@ -144,15 +156,8 @@ class CartScreen extends StatelessWidget {
               icon: Icons.arrow_back_ios_new,
               color: AppColors.mainColor,
               onClick: () {}),
-          Row(children: [
-            RoundButton(
-                icon: Icons.home, color: AppColors.mainColor, onClick: () {}),
-            const SizedBox(width: 20),
-            RoundButton(
-                icon: Icons.shopping_cart,
-                color: AppColors.mainColor,
-                onClick: () {}),
-          ]),
+          RoundButton(
+              icon: Icons.home, color: AppColors.mainColor, onClick: () {}),
         ],
       ),
     );
