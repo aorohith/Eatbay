@@ -1,8 +1,10 @@
+import 'package:eatbay/views/address_page/address_page.dart';
 import 'package:eatbay/views/widgets/address_icons.dart';
 import 'package:eatbay/views/widgets/core/colors.dart';
 import 'package:eatbay/views/widgets/core/constant.dart';
 import 'package:eatbay/views/widgets/signin_button.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class SelectAddressScreen extends StatelessWidget {
   const SelectAddressScreen({Key? key}) : super(key: key);
@@ -12,6 +14,14 @@ class SelectAddressScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Select Address"),
+        actions: [
+          IconButton(
+            onPressed: () {
+              Get.to(AddressPage());
+            },
+            icon: Icon(Icons.add),
+          ),
+        ],
       ),
       body: SafeArea(
         child: Padding(
@@ -35,13 +45,16 @@ class SelectAddressScreen extends StatelessWidget {
 
   Row topAddressTypeButton() {
     return Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                AddressIcons(icon: Icons.home,color: AppColors.mainColor,),
-                AddressIcons(icon: Icons.location_on),
-                AddressIcons(icon: Icons.work),
-              ],
-            );
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      children: [
+        AddressIcons(
+          icon: Icons.home,
+          color: AppColors.mainColor,
+        ),
+        AddressIcons(icon: Icons.location_on),
+        AddressIcons(icon: Icons.work),
+      ],
+    );
   }
 
   Card selectAddressCards({Color color = Colors.white}) {
