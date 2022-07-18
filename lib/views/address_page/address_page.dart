@@ -82,7 +82,7 @@ class AddressPage extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: GestureDetector(
         onTap: () {
-          Get.to(const PickLocationScreen());
+          Get.to(PickLocationScreen());
         },
         child: Container(
           height: 150,

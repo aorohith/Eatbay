@@ -1,5 +1,7 @@
 import 'package:eatbay/controllers/cart_controller.dart';
 import 'package:eatbay/models/cart_model.dart';
+import 'package:eatbay/views/address_page/address_page.dart';
+import 'package:eatbay/views/address_page/address_select_section.dart';
 import 'package:eatbay/views/widgets/big_text.dart';
 import 'package:eatbay/views/widgets/circle_increase_button.dart';
 import 'package:eatbay/views/widgets/core/colors.dart';
@@ -26,10 +28,52 @@ class CartScreen extends StatelessWidget {
                 children: [
                   _topButtons(),
                   listTiles(),
-                  Container(
-                    height: 50,
-                    width: 50,
-                    color: Colors.red,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Container(
+                        margin: EdgeInsets.only(bottom: 10),
+                        height: 50,
+                        width: 150,
+                        decoration: BoxDecoration(
+                          color: Colors.redAccent,
+                          borderRadius: BorderRadius.circular(5),
+                        ),
+                        child: Center(
+                          child: Text(
+                            "Rs 500",
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20),
+                          ),
+                        ),
+                      ),
+                      GestureDetector(
+                        onTap: (){
+                          Get.to(SelectAddressScreen());
+                        },
+                        child: Container(
+                          margin: EdgeInsets.only(bottom: 10),
+                          height: 50,
+                          width: 150,
+                          decoration: BoxDecoration(
+                              color: Colors.redAccent,
+                              borderRadius: BorderRadius.circular(5)),
+                          child: Center(
+                            child: Center(
+                              child: Text(
+                                "Checkout",
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 20),
+                              ),
+                            ),
+                          ),
+                        ),
+                      )
+                    ],
                   )
                 ],
               ),
