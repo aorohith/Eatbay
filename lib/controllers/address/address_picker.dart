@@ -5,16 +5,20 @@ import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-class AddressController extends GetxController {
-  final TextEditingController searchController = TextEditingController();
+class AddressPickerController extends GetxController {
 
   final Completer<GoogleMapController> controller1 = Completer();
 
   List<Marker> markers = [initialMarker];
 
+
   double latitude = 0;
   double longitude = 0;
 
+  final TextEditingController searchController = TextEditingController();
+  TextEditingController addressController = TextEditingController();
+  TextEditingController contactPersonController = TextEditingController();
+  TextEditingController phoneController = TextEditingController();
 
   final CameraPosition kGooglePlex = const CameraPosition(
     target: LatLng(9.79152, 76.746728),
@@ -27,6 +31,8 @@ class AddressController extends GetxController {
     icon: BitmapDescriptor.defaultMarker,
     position: LatLng(9.791129, 76.746728),
   );
+
+
 
   Future getCurrentLocation() async {
     await getUserCurrentLocation().then((value) async {
@@ -86,4 +92,13 @@ class AddressController extends GetxController {
     print(markers.length);
     update();
   }
+  
+
+  addAddress(){
+
+  }
+
+ 
+
+  
 }

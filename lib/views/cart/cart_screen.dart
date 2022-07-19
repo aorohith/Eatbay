@@ -174,7 +174,7 @@ class CartScreen extends StatelessWidget {
         ),
         GestureDetector(
           onTap: () {
-            Get.to(const SelectAddressScreen());
+            Get.to( SelectAddressScreen());
           },
           child: Container(
             margin: const EdgeInsets.only(bottom: 10),

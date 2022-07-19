@@ -1,4 +1,6 @@
-import 'package:eatbay/views/address_page/address_page.dart';
+import 'package:eatbay/controllers/address/address_controller.dart';
+import 'package:eatbay/models/address_model.dart';
+import 'package:eatbay/views/address_page/pick_location.dart';
 import 'package:eatbay/views/widgets/address_icons.dart';
 import 'package:eatbay/views/widgets/core/colors.dart';
 import 'package:eatbay/views/widgets/core/constant.dart';
@@ -7,7 +9,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class SelectAddressScreen extends StatelessWidget {
-  const SelectAddressScreen({Key? key}) : super(key: key);
+  SelectAddressScreen({Key? key}) : super(key: key);
+  final addressController = Get.put(AddressController());
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +20,7 @@ class SelectAddressScreen extends StatelessWidget {
         actions: [
           IconButton(
             onPressed: () {
-              Get.to(AddressPage());
+              Get.to(()=>PickLocationScreen());
             },
             icon: Icon(Icons.add),
           ),
@@ -30,10 +33,15 @@ class SelectAddressScreen extends StatelessWidget {
             children: [
               topAddressTypeButton(),
               h20,
-              selectAddressCards(),
-              selectAddressCards(color: AppColors.mainColor),
-              selectAddressCards(),
-              selectAddressCards(),
+              Expanded(
+                child: ListView.separated(
+                  itemBuilder: (context, index) => selectAddressCards(
+                    address: addressController.address[index],
+                  ),
+                  separatorBuilder: (context, index) => Divider(),
+                  itemCount: addressController.address.length,
+                ),
+              ),
               h20,
               LoginButton(text: "Select", onClick: () {})
             ],
@@ -57,19 +65,32 @@ class SelectAddressScreen extends StatelessWidget {
     );
   }
 
-  Card selectAddressCards({Color color = Colors.white}) {
+  Card selectAddressCards(
+      {required AddressModel address, Color color = Colors.white}) {
     return Card(
       color: color,
       elevation: 5,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-      child: Container(
+      child: SizedBox(
         width: double.infinity,
         height: 100,
         child: Padding(
           padding: const EdgeInsets.all(20.0),
-          child: Text(
-            "Achu\n9562802748\nHouse no 10, No 20 Street,Chengannur",
-            style: TextStyle(fontSize: 16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                address.contactPerson,
+                style:
+                    const TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
+              ),
+              Text(address.phone),
+              Text(
+                address.address,
+                overflow: TextOverflow.ellipsis,
+                maxLines: 3,
+              ),
+            ],
           ),
         ),
       ),

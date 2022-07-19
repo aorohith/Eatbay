@@ -1,8 +1,8 @@
-import 'package:eatbay/controllers/address_controller.dart';
+import 'package:eatbay/controllers/address/address_picker.dart';
+import 'package:eatbay/views/address_page/widgets/address_trigger_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'dart:async';
 
 class PickLocationScreen extends StatefulWidget {
   const PickLocationScreen({Key? key}) : super(key: key);
@@ -11,7 +11,7 @@ class PickLocationScreen extends StatefulWidget {
 }
 
 class PickLocationScreenState extends State<PickLocationScreen> {
-  final addressController = Get.put(AddressController());
+  final addressController = Get.put(AddressPickerController());
 
   // static final Marker _kLakeMarker = Marker(
   //   markerId: const MarkerId('kLakeMarker'),
@@ -47,8 +47,8 @@ class PickLocationScreenState extends State<PickLocationScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<AddressController>(
-      init: AddressController(),
+    return GetBuilder<AddressPickerController>(
+      init: AddressPickerController(),
       builder: (addressController) {
         return Scaffold(
           body: Stack(
@@ -68,17 +68,39 @@ class PickLocationScreenState extends State<PickLocationScreen> {
                 zoomControlsEnabled: false,
               ),
               search(),
-              bottomButton(),
+              currentLocation(),
+              bottomSection(),
             ],
-          ),
-          floatingActionButton: FloatingActionButton(
-            onPressed: () async {
-              addressController.getCurrentLocation();
-            },
-            child: const Icon(Icons.location_searching_outlined),
           ),
         );
       },
+    );
+  }
+
+  currentLocation() {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 120.0),
+      child: Align(
+        alignment: Alignment.bottomCenter,
+        child: ElevatedButton.icon(
+          style: ElevatedButton.styleFrom(
+            primary: Colors.white.withOpacity(0.9),
+            side: const BorderSide(color: Colors.red),
+            shadowColor: Colors.transparent,
+          ),
+          onPressed: () async {
+            await addressController.getCurrentLocation();
+          },
+          icon: const Icon(
+            Icons.my_location,
+            color: Colors.red,
+          ),
+          label: const Text(
+            "Use Current Location",
+            style: const TextStyle(color: Colors.red),
+          ),
+        ),
+      ),
     );
   }
 
@@ -87,56 +109,69 @@ class PickLocationScreenState extends State<PickLocationScreen> {
   //   controller.animateCamera(CameraUpdate.newCameraPosition(_kLake));
   // }
 
-  Align bottomButton() {
+  Align bottomSection() {
     return Align(
       alignment: Alignment.bottomCenter,
-      child: Padding(
-        padding: const EdgeInsets.only(bottom: 30),
-        child: SizedBox(
-          width: 250,
-          height: 50,
-          child: ElevatedButton(
-            onPressed: () async{
-              var placemark = await addressController.getPlaceSuggesion();
-
-              Get.defaultDialog(
-                title: "Select Address",
-                content: SizedBox(
-                    height: 300,
-                    width: 300,
-                    child: Column(
-                      children: [
-                        Expanded(
-                          child: ListView.separated(
-                            itemBuilder: (context, index) => Card(
-                              child: ListTile(
-                                title: Text(placemark[index].name.toString()),
-                                subtitle:
-                                    Text(placemark[index].locality.toString()),
-                              ),
+      child: Container(
+        height: 100,
+        width: double.infinity,
+        decoration: BoxDecoration(
+            color: Colors.white.withOpacity(0.9),
+            borderRadius: const BorderRadius.only(
+              topLeft: Radius.circular(15),
+              topRight: Radius.circular(15),
+            )),
+        child: Column(
+          children: [
+            TextButton(
+              onPressed: () async {
+                var placemark = await addressController.getPlaceSuggesion();
+                Get.defaultDialog(
+                  title: "Select Address",
+                  content: SizedBox(
+                      height: 300,
+                      width: 300,
+                      child: Column(
+                        children: [
+                          Expanded(
+                            child: placeListTile(placemark),
+                          ),
+                          SizedBox(
+                            width: double.infinity,
+                            child: ElevatedButton(
+                              onPressed: () {},
+                              child: const Text("Just Select Location"),
                             ),
-                            separatorBuilder: (context, index) =>
-                                const Divider(),
-                            itemCount: placemark.length,
-                          ),
-                        ),
-                        SizedBox(
-                          width: double.infinity,
-                          child: ElevatedButton(
-                            onPressed: () {},
-                            child: Text("Just Select Location"),
-                          ),
-                        )
-                      ],
-                    )),
-              );
-            },
-            child: const Text(
-              'Select Address',
+                          )
+                        ],
+                      )),
+                );
+              },
+              child: const Text("Select Place"),
             ),
+            AddressTriggerButton(),
+          ],
+        ),
+      ),
+    );
+  }
+
+  ListView placeListTile(placemark) {
+    return ListView.separated(
+      itemBuilder: (context, index) => GestureDetector(
+        onTap: () {
+          addressController.addAddress();
+          Get.back();
+        },
+        child: Card(
+          child: ListTile(
+            title: Text(placemark[index].name.toString()),
+            subtitle: Text(placemark[index].locality.toString()),
           ),
         ),
       ),
+      separatorBuilder: (context, index) => const Divider(),
+      itemCount: placemark.length,
     );
   }
 

@@ -1,3 +1,4 @@
+import 'package:eatbay/controllers/address/address_picker.dart';
 import 'package:eatbay/views/widgets/address_icons.dart';
 import 'package:eatbay/views/widgets/big_text.dart';
 import 'package:eatbay/views/widgets/core/colors.dart';
@@ -8,9 +9,8 @@ import 'package:get/get.dart';
 import 'pick_location.dart';
 
 class AddressPage extends StatelessWidget {
-   AddressPage({Key? key}) : super(key: key);
-    TextEditingController emailController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
+  AddressPage({Key? key}) : super(key: key);
+  final addressPickerController = Get.put(AddressPickerController());
 
   @override
   Widget build(BuildContext context) {
@@ -19,22 +19,24 @@ class AddressPage extends StatelessWidget {
         title: const Text("Add Address"),
       ),
       body: SafeArea(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            //map section
-            topAddressMapSection(),
-            //button row
-            addressTypeButtons(),
-            //Input field
-            bottomTextFields(),
-            //submit button
-            LoginButton(
-              text: "Save Address",
-              textSize: 20,
-              onClick: () {},
-            ),
-          ],
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              //map section
+              topAddressMapSection(),
+              //button row
+              addressTypeButtons(),
+              //Input field
+              bottomTextFields(),
+              //submit button
+              LoginButton(
+                text: "Save Address",
+                textSize: 20,
+                onClick: () {},
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -50,17 +52,27 @@ class AddressPage extends StatelessWidget {
           const SizedBox(
             height: 10,
           ),
-          IconTextFiield(icon: Icons.location_on, hintText: "Address",controller: emailController),
+          IconTextFiield(
+              icon: Icons.location_on,
+              hintText: "Address",
+              controller: addressPickerController.contactPersonController),
           BigText(text: "Contact Person Name"),
           const SizedBox(
             height: 10,
           ),
-          IconTextFiield(icon: Icons.person, hintText: "Name",controller: emailController,),
+          IconTextFiield(
+            icon: Icons.person,
+            hintText: "Name",
+            controller: addressPickerController.contactPersonController,
+          ),
           BigText(text: "Contact Person Number"),
           const SizedBox(
             height: 10,
           ),
-          IconTextFiield(icon: Icons.phone, hintText: "Phone Number",controller: emailController),
+          IconTextFiield(
+              icon: Icons.phone,
+              hintText: "Phone Number",
+              controller: addressPickerController),
         ],
       ),
     );

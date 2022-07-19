@@ -1,8 +1,8 @@
 import 'package:eatbay/controllers/auth_controller/auth_controller.dart';
+import 'package:eatbay/views/address_page/address_select_section.dart';
 import 'package:eatbay/views/widgets/profile_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../address_page/address_page.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({Key? key}) : super(key: key);
@@ -23,7 +23,7 @@ class ProfilePage extends StatelessWidget {
                 icon: Icons.location_on,
                 text: "Fill Address",
                 onClick: () {
-                  Get.to( AddressPage());
+                  Get.to(()=>SelectAddressScreen());
                 }),
             ProfileTiles(
                 icon: Icons.feedback, text: "Complaints", onClick: () {}),

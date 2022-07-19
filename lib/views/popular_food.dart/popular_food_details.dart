@@ -206,7 +206,7 @@ class PopularFoodDetail extends StatelessWidget {
             ),
             GestureDetector(
               onTap: () {
-                Get.to(const SelectAddressScreen());
+                Get.to( SelectAddressScreen());
               },
               child: GestureDetector(
                 onTap: () {

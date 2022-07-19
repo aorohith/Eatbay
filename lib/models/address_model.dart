@@ -2,9 +2,8 @@ class AddressModel {
   String id;
   String userId;
   String contactPerson;
-  int phone;
-  String addressName;
-  String locality;
+  String phone;
+  String address;
   String landmark;
 
   AddressModel({
@@ -12,8 +11,7 @@ class AddressModel {
     required this.userId,
     required this.contactPerson,
     required this.phone,
-    required this.addressName,
-    this.locality = '',
+    required this.address,
     this.landmark = '',
   });
 
@@ -22,8 +20,7 @@ class AddressModel {
         'user_id': userId,
         'contact_person': contactPerson,
         'phone': phone,
-        'address_name': addressName,
-        'locality': locality,
+        'address': address,
         'landmark': landmark,
       };
 
@@ -32,8 +29,7 @@ class AddressModel {
         userId: json['user_id'],
         contactPerson: json['contact_person'],
         phone: json['phone'],
-        addressName: json['address_name'],
-        locality: json['locality'],
+        address: json['address'],
         landmark: json['landmark'],
       );
 }
