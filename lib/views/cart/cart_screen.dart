@@ -1,6 +1,5 @@
 import 'package:eatbay/controllers/cart_controller.dart';
 import 'package:eatbay/models/cart_model.dart';
-import 'package:eatbay/views/address_page/address_page.dart';
 import 'package:eatbay/views/address_page/address_select_section.dart';
 import 'package:eatbay/views/widgets/big_text.dart';
 import 'package:eatbay/views/widgets/circle_increase_button.dart';
@@ -21,60 +20,19 @@ class CartScreen extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.only(left: 10, right: 10),
+          padding: const EdgeInsets.only(
+            left: 10,
+            right: 10,
+          ),
           child: Stack(
             children: [
               Column(
                 children: [
                   _topButtons(),
                   listTiles(),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Container(
-                        margin: EdgeInsets.only(bottom: 10),
-                        height: 50,
-                        width: 150,
-                        decoration: BoxDecoration(
-                          color: Colors.redAccent,
-                          borderRadius: BorderRadius.circular(5),
-                        ),
-                        child: Center(
-                          child: Text(
-                            "Rs 500",
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 20),
-                          ),
-                        ),
-                      ),
-                      GestureDetector(
-                        onTap: (){
-                          Get.to(SelectAddressScreen());
-                        },
-                        child: Container(
-                          margin: EdgeInsets.only(bottom: 10),
-                          height: 50,
-                          width: 150,
-                          decoration: BoxDecoration(
-                              color: Colors.redAccent,
-                              borderRadius: BorderRadius.circular(5)),
-                          child: Center(
-                            child: Center(
-                              child: Text(
-                                "Checkout",
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 20),
-                              ),
-                            ),
-                          ),
-                        ),
-                      )
-                    ],
-                  )
+                  currentUser == null || cartController.cartProducts.isEmpty
+                      ? const SizedBox()
+                      : checkout(),
                 ],
               ),
             ],
@@ -84,32 +42,45 @@ class CartScreen extends StatelessWidget {
     );
   }
 
-  listTiles() {
-    // final cartController = Get.put(CartController());
+  Padding _topButtons() {
+    return Padding(
+      padding: const EdgeInsets.only(
+        top: 50,
+        left: 20,
+        right: 20,
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          RoundButton(
+              icon: Icons.arrow_back_ios_new,
+              color: AppColors.mainColor,
+              onClick: () {}),
+          RoundButton(
+              icon: Icons.home, color: AppColors.mainColor, onClick: () {}),
+        ],
+      ),
+    );
+  }
 
+  listTiles() {
     if (cartController.isLoading) {
-      return CircularProgressIndicator();
+      return const CircularProgressIndicator();
     } else {
       return Expanded(
-        child: currentUser == null
-            ? Center(
-                child: Text(
-                "Please Login for Cart",
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
-              ))
-            : GetBuilder<CartController>(
-                init: CartController(),
-                initState: (_) {},
-                builder: (cartController) {
-                  return ListView.builder(
-                    itemCount: cartController.cartProducts.length,
-                    itemBuilder: (context, index) {
-                      Cart cartProduct = cartController.cartProducts[index];
-                      return cartContainer(cartProduct);
-                    },
-                  );
-                },
-              ),
+        child: GetBuilder<CartController>(
+          init: CartController(),
+          initState: (_) {},
+          builder: (cartController) {
+            return ListView.builder(
+              itemCount: cartController.cartProducts.length,
+              itemBuilder: (context, index) {
+                Cart cartProduct = cartController.cartProducts[index];
+                return cartContainer(cartProduct);
+              },
+            );
+          },
+        ),
       );
     }
   }
@@ -168,7 +139,7 @@ class CartScreen extends StatelessWidget {
                   },
                 ),
                 Text(cartProduct.quantity.toString(),
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 25,
                       fontWeight: FontWeight.bold,
                     )),
@@ -186,24 +157,46 @@ class CartScreen extends StatelessWidget {
     );
   }
 
-  Padding _topButtons() {
-    return Padding(
-      padding: const EdgeInsets.only(
-        top: 50,
-        left: 20,
-        right: 20,
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          RoundButton(
-              icon: Icons.arrow_back_ios_new,
-              color: AppColors.mainColor,
-              onClick: () {}),
-          RoundButton(
-              icon: Icons.home, color: AppColors.mainColor, onClick: () {}),
-        ],
-      ),
+  checkout() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.end,
+      children: [
+        Container(
+          margin: const EdgeInsets.only(bottom: 10),
+          height: 50,
+          width: 100,
+          child: const Center(
+            child: Text(
+              "Checkout",
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 23),
+            ),
+          ),
+        ),
+        GestureDetector(
+          onTap: () {
+            Get.to(const SelectAddressScreen());
+          },
+          child: Container(
+            margin: const EdgeInsets.only(bottom: 10),
+            height: 50,
+            width: 150,
+            decoration: BoxDecoration(
+                color: Colors.redAccent,
+                borderRadius: BorderRadius.circular(5)),
+            child: const Center(
+              child: Center(
+                child: Text(
+                  "Rs 500",
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20),
+                ),
+              ),
+            ),
+          ),
+        )
+      ],
     );
   }
 }

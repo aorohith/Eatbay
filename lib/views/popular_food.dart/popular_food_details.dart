@@ -192,21 +192,21 @@ class PopularFoodDetail extends StatelessWidget {
                   children: [
                     GestureDetector(
                       onTap: () => homeController.quantity.value++,
-                      child: Text(
+                      child: const Text(
                         '+',
                         style: TextStyle(fontSize: 20),
                       ),
                     ),
                     Obx(() => Text(homeController.quantity.value.toString(),
-                        style: TextStyle(fontSize: 20))),
+                        style: const TextStyle(fontSize: 20))),
                     GestureDetector(
                         onTap: () => homeController.quantity.value--,
-                        child: Text('-', style: TextStyle(fontSize: 25))),
+                        child: const Text('-', style: TextStyle(fontSize: 25))),
                   ]),
             ),
             GestureDetector(
               onTap: () {
-                Get.to(SelectAddressScreen());
+                Get.to(const SelectAddressScreen());
               },
               child: GestureDetector(
                 onTap: () {
@@ -231,7 +231,7 @@ class PopularFoodDetail extends StatelessWidget {
                       Obx(() => CommonButtonText(
                           text: (homeController.quantity.value * product.price)
                               .toString())),
-                      CommonButtonText(text: "Add to Cart")
+                      const CommonButtonText(text: "Add to Cart")
                     ],
                   ),
                 ),

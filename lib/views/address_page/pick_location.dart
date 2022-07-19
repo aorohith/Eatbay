@@ -1,45 +1,30 @@
-import 'package:eatbay/models/services/locatio_services.dart';
+import 'package:eatbay/controllers/address_controller.dart';
 import 'package:flutter/material.dart';
-import 'package:geolocator/geolocator.dart';
+import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'dart:async';
 
 class PickLocationScreen extends StatefulWidget {
+  const PickLocationScreen({Key? key}) : super(key: key);
   @override
   State<PickLocationScreen> createState() => PickLocationScreenState();
 }
 
 class PickLocationScreenState extends State<PickLocationScreen> {
-  TextEditingController _searchController = TextEditingController();
+  final addressController = Get.put(AddressController());
 
-  Completer<GoogleMapController> _controller = Completer();
+  // static final Marker _kLakeMarker = Marker(
+  //   markerId: const MarkerId('kLakeMarker'),
+  //   infoWindow: const InfoWindow(title: "Lake Marker"),
+  //   icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueBlue),
+  //   position: const LatLng(9.791129, 76.746728),
+  // );
 
-  var _markers = {_kGooglePlexMarker, _kLakeMarker};
-
-  static final CameraPosition _kGooglePlex = const CameraPosition(
-    target: LatLng(37.42796133580664, -122.085749655962),
-    zoom: 14.4746,
-  );
-
-  static final Marker _kGooglePlexMarker = const Marker(
-    markerId: MarkerId('kGooglePlex'),
-    infoWindow: InfoWindow(title: "Google Plex"),
-    icon: BitmapDescriptor.defaultMarker,
-    position: LatLng(37.42796133580664, -122.085749655962),
-  );
-
-  static final Marker _kLakeMarker = Marker(
-    markerId: const MarkerId('kLakeMarker'),
-    infoWindow: const InfoWindow(title: "Lake Marker"),
-    icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueBlue),
-    position: const LatLng(37.43296265331129, -122.08832357078792),
-  );
-
-  static final CameraPosition _kLake = CameraPosition(
-      bearing: 192.8334901395799,
-      target: LatLng(37.43296265331129, -122.08832357078792),
-      tilt: 59.440717697143555,
-      zoom: 19.151926040649414);
+  // static const CameraPosition _kLake = CameraPosition(
+  //     bearing: 192.8334901395799,
+  //     target: LatLng(37.43296265331129, -122.08832357078792),
+  //     tilt: 59.440717697143555,
+  //     zoom: 19.151926040649414);
 
   // static final Polyline _kPolyline = const Polyline(
   //     polylineId: PolylineId('_kPolyline'),
@@ -62,47 +47,35 @@ class PickLocationScreenState extends State<PickLocationScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Stack(
-        children: [
-          GoogleMap(
-            markers: _markers,
-            mapType: MapType.normal,
-            initialCameraPosition: _kGooglePlex,
-            onMapCreated: (GoogleMapController controller) {
-              _controller.complete(controller);
-            },
-            // polylines: {_kPolyline},
-            // polygons: {_kPolygon},
+    return GetBuilder<AddressController>(
+      init: AddressController(),
+      builder: (addressController) {
+        return Scaffold(
+          body: Stack(
+            children: [
+              GoogleMap(
+                markers: addressController.markers,
+                mapType: MapType.normal,
+                initialCameraPosition: addressController.kGooglePlex,
+                onMapCreated: (GoogleMapController controller) {
+                  addressController.controller1.complete(controller);
+                },
+                // polylines: {_kPolyline},
+                // polygons: {_kPolygon},
+                zoomControlsEnabled: false,
+              ),
+              search(),
+              bottomButton(),
+            ],
           ),
-          search(),
-          bottomButton(),
-        ],
-      ),
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () async {
-          await getUserCurrentLocation().then((value) async {
-            print(value.latitude);
-            print(value.longitude);
-            _markers.add(Marker(
-                markerId: MarkerId('2'),
-                position: LatLng(value.latitude, value.longitude),
-                infoWindow: InfoWindow(title: "My current location")));
-            CameraPosition cameraPosition = CameraPosition(
-              target: LatLng(value.latitude, value.longitude),
-              zoom: 14,
-            );
-            final GoogleMapController controller = await _controller.future;
-
-            controller.animateCamera(CameraUpdate.newCameraPosition(cameraPosition));
-          });
-          setState(() {
-            
-          });
-        },
-        label: const Text('To the lake!'),
-        icon: const Icon(Icons.directions_boat),
-      ),
+          floatingActionButton: FloatingActionButton(
+            onPressed: () async {
+             addressController.getCurrentLocation();
+            },
+            child: const Icon(Icons.location_searching_outlined),
+          ),
+        );
+      },
     );
   }
 
@@ -120,9 +93,11 @@ class PickLocationScreenState extends State<PickLocationScreen> {
           width: 250,
           height: 50,
           child: ElevatedButton(
-            onPressed: () {},
+            onPressed: () {
+              addressController.getPlaceSuggesion();
+            },
             child: const Text(
-              'Pick Address',
+              'Select Address',
             ),
           ),
         ),
@@ -146,15 +121,15 @@ class PickLocationScreenState extends State<PickLocationScreen> {
         child: SizedBox(
           height: 70,
           child: TextFormField(
-            controller: _searchController,
+            controller: addressController.searchController,
             decoration: InputDecoration(
               fillColor: Colors.white,
               prefixIcon: const Icon(Icons.location_on),
               suffixIcon: IconButton(
                 onPressed: () {
-                  LocationService().getPlaceId(_searchController.text);
+                  // LocationService().getPlaceId(_searchController.text);
                 },
-                icon: Icon(
+                icon: const Icon(
                   Icons.search,
                 ),
               ),
@@ -169,26 +144,4 @@ class PickLocationScreenState extends State<PickLocationScreen> {
       ),
     );
   }
-
-  Future<Position> getUserCurrentLocation() async {
-    await Geolocator.requestPermission()
-        .then((value) {})
-        .onError((error, stackTrace) {
-      print('error');
-    });
-    return await Geolocator.getCurrentPosition();
-  }
-
-  // Container bgBackground() {
-  //   return Container(
-  //     decoration: const BoxDecoration(
-  //       image: DecorationImage(
-  //         image: NetworkImage(
-  //           "https://media.wired.com/photos/59269cd37034dc5f91bec0f1/master/pass/GoogleMapTA.jpg",
-  //         ),
-  //         fit: BoxFit.cover,
-  //       ),
-  //     ),
-  //   );
-  // }
 }

@@ -88,6 +88,7 @@ class AuthController extends GetxController {
   }
 
   void logout() {
+    GoogleSignIn().disconnect();
     auth.signOut();
     update();
   }
