@@ -10,25 +10,18 @@ class AddressController extends GetxController {
 
   final Completer<GoogleMapController> controller1 = Completer();
 
-  final Set<Marker> markers = {kGooglePlexMarker};
+  List<Marker> markers = [initialMarker];
 
-  Position position = Position(
-    longitude: 9.79152,
-    latitude: 76.746728,
-    timestamp: DateTime.now(),
-    accuracy: 10,
-    altitude: 10,
-    heading: 10,
-    speed: 10,
-    speedAccuracy: 10,
-  );
+  double latitude = 0;
+  double longitude = 0;
+
 
   final CameraPosition kGooglePlex = const CameraPosition(
     target: LatLng(9.79152, 76.746728),
     zoom: 14.4746,
   );
 
-  static const Marker kGooglePlexMarker = Marker(
+  static const Marker initialMarker = Marker(
     markerId: MarkerId('kGooglePlex'),
     infoWindow: InfoWindow(title: "Google Plex"),
     icon: BitmapDescriptor.defaultMarker,
@@ -37,7 +30,6 @@ class AddressController extends GetxController {
 
   Future getCurrentLocation() async {
     await getUserCurrentLocation().then((value) async {
-      position = value;
       markers.add(
         Marker(
           markerId: const MarkerId('2'),
@@ -63,46 +55,35 @@ class AddressController extends GetxController {
         .onError((error, stackTrace) {
       print('error');
     });
+    Position position = await Geolocator.getCurrentPosition();
+    longitude = position.longitude;
+    latitude = position.latitude;
     return await Geolocator.getCurrentPosition();
   }
 
   getPlaceSuggesion() async {
-    if (position.speed != 10) {
+    if (latitude != 0) {
       List<Placemark> placemark = await placemarkFromCoordinates(
-        position.latitude,
-        position.longitude,
+        latitude,
+        longitude,
       );
-      Get.defaultDialog(
-        title: "Select Address",
-        content: Container(
-          height: 300,
-          width: 300,
-            child: Column(
-          children: [
-            Expanded(
-              child: ListView.separated(
-                itemBuilder: (context, index) => Card(
-                  child: ListTile(
-                    title: Text(placemark[index].name.toString()),
-                    subtitle: Text(placemark[index].locality.toString()),
-                  ),
-                ),
-                separatorBuilder: (context, index) => const Divider(),
-                itemCount: placemark.length,
-              ),
-            ),
-            SizedBox(
-              width: double.infinity,
-              child: ElevatedButton(
-                onPressed: () {},
-                child: Text("Just Select Location"),
-              ),
-            )
-          ],
-        )),
-      );
+      return placemark;
     } else {
       Get.snackbar("Alert", "Please select current location");
     }
+  }
+
+  onTapMarker(LatLng latLng) {
+    latitude = latLng.latitude;
+    longitude = latLng.longitude;
+
+    Marker newMarker = Marker(
+      markerId: const MarkerId('new_marker'),
+      icon: BitmapDescriptor.defaultMarker,
+      position: LatLng(latitude,longitude),
+    );
+    markers.add(newMarker);
+    print(markers.length);
+    update();
   }
 }

@@ -54,11 +54,14 @@ class PickLocationScreenState extends State<PickLocationScreen> {
           body: Stack(
             children: [
               GoogleMap(
-                markers: addressController.markers,
+                markers: Set.from(addressController.markers),
                 mapType: MapType.normal,
                 initialCameraPosition: addressController.kGooglePlex,
                 onMapCreated: (GoogleMapController controller) {
                   addressController.controller1.complete(controller);
+                },
+                onTap: (LatLng latLng) {
+                  addressController.onTapMarker(latLng);
                 },
                 // polylines: {_kPolyline},
                 // polygons: {_kPolygon},
@@ -70,7 +73,7 @@ class PickLocationScreenState extends State<PickLocationScreen> {
           ),
           floatingActionButton: FloatingActionButton(
             onPressed: () async {
-             addressController.getCurrentLocation();
+              addressController.getCurrentLocation();
             },
             child: const Icon(Icons.location_searching_outlined),
           ),
@@ -93,8 +96,40 @@ class PickLocationScreenState extends State<PickLocationScreen> {
           width: 250,
           height: 50,
           child: ElevatedButton(
-            onPressed: () {
-              addressController.getPlaceSuggesion();
+            onPressed: () async{
+              var placemark = await addressController.getPlaceSuggesion();
+
+              Get.defaultDialog(
+                title: "Select Address",
+                content: SizedBox(
+                    height: 300,
+                    width: 300,
+                    child: Column(
+                      children: [
+                        Expanded(
+                          child: ListView.separated(
+                            itemBuilder: (context, index) => Card(
+                              child: ListTile(
+                                title: Text(placemark[index].name.toString()),
+                                subtitle:
+                                    Text(placemark[index].locality.toString()),
+                              ),
+                            ),
+                            separatorBuilder: (context, index) =>
+                                const Divider(),
+                            itemCount: placemark.length,
+                          ),
+                        ),
+                        SizedBox(
+                          width: double.infinity,
+                          child: ElevatedButton(
+                            onPressed: () {},
+                            child: Text("Just Select Location"),
+                          ),
+                        )
+                      ],
+                    )),
+              );
             },
             child: const Text(
               'Select Address',
