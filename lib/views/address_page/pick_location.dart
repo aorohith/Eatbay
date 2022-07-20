@@ -51,6 +51,7 @@ class PickLocationScreenState extends State<PickLocationScreen> {
       init: AddressPickerController(),
       builder: (addressController) {
         return Scaffold(
+          resizeToAvoidBottomInset: false,
           body: Stack(
             children: [
               GoogleMap(
@@ -66,6 +67,8 @@ class PickLocationScreenState extends State<PickLocationScreen> {
                 // polylines: {_kPolyline},
                 // polygons: {_kPolygon},
                 zoomControlsEnabled: false,
+                myLocationEnabled: true,
+                myLocationButtonEnabled: true,
               ),
               search(),
               currentLocation(),
@@ -149,7 +152,12 @@ class PickLocationScreenState extends State<PickLocationScreen> {
               },
               child: const Text("Select Place"),
             ),
-            AddressTriggerButton(),
+            AddressTriggerButton(
+              onClick: () {
+                addressBottomSheet();
+              },
+              text: 'Enter Complete Addresses',
+            ),
           ],
         ),
       ),

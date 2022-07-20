@@ -11,8 +11,14 @@ class AddressController extends GetxController {
   List<String> addressType = [
     'Home','Work','Hotel','Other'
   ];
+  String currentDropdown = 'Home';
   int newSelectedIndex = 0;
   int prevSelectedIndex = 1;
+
+  changeDropdown(String value){
+    currentDropdown = value;
+    update();
+  }
 
   @override
   void onReady() {
