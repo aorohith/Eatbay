@@ -8,11 +8,13 @@ import 'package:eatbay/models/product_model.dart';
 import 'package:get/get.dart';
 
 class HomeController extends GetxController {
+  final cartController = Get.put(CartController());
+
   var isLoading = false;
   RxList<Product> products = RxList<Product>([]);
   var quantity = 1.obs;
   final firebaseInstance = FirebaseFirestore.instance;
-  final cartController = Get.put(CartController());
+  
 
   @override
   void onInit() {
@@ -39,7 +41,7 @@ class HomeController extends GetxController {
     // await checkWholeCartIsEmpty();
     //check cart is empty or not for the current user also return true when empty
     bool isEmpty = await checkUserCartIsEmpty(cart);
-
+    // log(isEmpty.toString());
     if (isEmpty) {
       final doc = firebaseInstance.collection('cartproducts').doc();
       cart.id = doc.id;

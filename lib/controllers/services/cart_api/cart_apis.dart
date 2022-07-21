@@ -30,37 +30,56 @@ checkUserCartIsEmpty(Cart cartObj) async {
   final cartController = Get.put(CartController());
 
   final fireAuth = FirebaseAuth.instance.currentUser;
-
   if (fireAuth != null) {
-    Stream<QuerySnapshot<Map<String, dynamic>>> temp =
-        FirebaseFirestore.instance.collection('cartproducts').snapshots();
-    QuerySnapshot<Map<String, dynamic>> data = await temp.first;
-    var docs = data.docs;
-    log((docs[0].data().values.isEmpty).toString());
-    if (docs[0].data().values.isEmpty) {
+    var prodIds =
+        cartController.cartProducts.value.map((e) => e.product.id).toList();
+    // if(prodIds.contains(cartObj.product.id)){
+    //   return false;
+    // }else{
+    //   return true;
+    // }
+
+    var contain = cartController.cartProducts.value
+        .where((element) => element.product.id == cartObj.product.id)
+        .toList();
+    //value exists
+    if (contain.isEmpty) {
       return true;
     } else {
-      var withProdIdList = docs.map((e) {
-        if (e.data()['user_id'] == fireAuth.uid) {
-          return e;
-        }
-      }).toList();
-      if (withProdIdList[0] == null) {
-        return true;
-      } else {
-        List<Cart?> cart = withProdIdList.map((value) {
-          if (value != null) {
-            Cart cart = Cart.fromJson(value.data());
-
-            if (cart.product.id == cartObj.product.id) {
-              log(cart.product.id);
-              cartController.currentCartProduct = cart;
-              return cart;
-            }
-          }
-        }).toList();
-        return false;
-      }
+      cartController.currentCartProduct = contain.first;
+      return false;
     }
+
+    // if (fireAuth != null) {
+    //   Stream<QuerySnapshot<Map<String, dynamic>>> temp =
+    //       FirebaseFirestore.instance.collection('cartproducts').snapshots();
+    //   QuerySnapshot<Map<String, dynamic>> data = await temp.first;
+    //   var docs = data.docs;
+    //   if (docs[0].data().values.isEmpty) {//check all collection is empty or not
+    //     return true;
+    //   } else {
+    //     var userCartList = docs.map((e) {
+    //       if (e.data()['user_id'] == fireAuth.uid) {//select user cart products
+    //         return e;
+    //       }
+    //     }).toList();
+    //     if (userCartList[0] == null) {//sure, user dont have any product in cart
+    //       return true;
+    //     } else {
+    //       var a = userCartList.map((value) {
+    //         if (value != null) {
+    //           Cart cart = Cart.fromJson(value.data());
+    //           if (cart.product.id == cartObj.product.id) {//check the product id with fetched cart product
+    //             cartController.currentCartProduct = cart;
+    //             return cart;
+    //           }
+    //           }
+    //         }
+    //       ).toSet().toList();
+    //       log("=================$a");
+    //       return false;
+    //     }
+    //   }
+    // }
   }
 }
