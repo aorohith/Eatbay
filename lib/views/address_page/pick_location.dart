@@ -5,13 +5,9 @@ import 'package:geocoding/geocoding.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-class PickLocationScreen extends StatefulWidget {
-  const PickLocationScreen({Key? key}) : super(key: key);
-  @override
-  State<PickLocationScreen> createState() => PickLocationScreenState();
-}
+class PickLocationScreen extends StatelessWidget {
+  PickLocationScreen({Key? key}) : super(key: key);
 
-class PickLocationScreenState extends State<PickLocationScreen> {
   final addressController = Get.put(AddressPickerController());
   @override
   Widget build(BuildContext context) {

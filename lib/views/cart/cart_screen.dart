@@ -13,11 +13,11 @@ import 'package:get/get.dart';
 class CartScreen extends StatelessWidget {
   CartScreen({Key? key}) : super(key: key);
 
-  final cartController = Get.put(CartController());
+  final cartController = Get.find<CartController>();
   final currentUser = FirebaseAuth.instance.currentUser;
   @override
   Widget build(BuildContext context) {
-
+    cartController.getCartTotal();
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -51,12 +51,8 @@ class CartScreen extends StatelessWidget {
         right: 20,
       ),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          RoundButton(
-              icon: Icons.arrow_back_ios_new,
-              color: AppColors.mainColor,
-              onClick: () {}),
           RoundButton(
               icon: Icons.home, color: AppColors.mainColor, onClick: () {}),
         ],

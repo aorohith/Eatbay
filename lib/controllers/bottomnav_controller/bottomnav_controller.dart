@@ -9,9 +9,6 @@ class BottomnavController extends GetxController{
 
   void changeIndex(int index){
     selectedIndex = index;
-    if(index==2){
-      cartController.initialGrandTotal();
-    }
     update();
   }
 }

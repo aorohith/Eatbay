@@ -7,8 +7,7 @@ import '../home/main_food_page.dart';
 import '../orders_screen.dart/orders_screen.dart';
 
 class BottomNavScreen extends StatelessWidget {
-  int index;
-  BottomNavScreen({Key? key, this.index = 0}) : super(key: key);
+  BottomNavScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

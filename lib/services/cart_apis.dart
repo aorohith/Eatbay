@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:eatbay/controllers/cart_controller.dart';
 import 'package:eatbay/models/cart_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -22,4 +23,9 @@ checkUserCartIsEmpty(Cart cartObj) async {
   } catch (e) {
     Get.snackbar("Error occured", e.toString());
   }
+}
+
+deleteCartProduct(String cartId){
+  final docProduct = FirebaseFirestore.instance.collection('cartproducts').doc(cartId);
+    docProduct.delete();
 }
