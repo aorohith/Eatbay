@@ -35,36 +35,35 @@ class HomeController extends GetxController {
   addToCart(Cart cart) async {
     isLoading = true;
     // try {
-      //check product is in collection or not?
-      bool isEmpty = await checkCartIsEmpty();
-      //check cart is empty or not for the current user also
-      bool isExist = await checkProductIsExist(cart.product.id);
+    //check product is in collection or not? true return when empty
+    // await checkWholeCartIsEmpty();
+    //check cart is empty or not for the current user also return true when empty
+    bool isEmpty = await checkUserCartIsEmpty(cart);
 
-      if (isEmpty || !isExist) {
-        final doc = firebaseInstance.collection('cartproducts').doc();
-        cart.id = doc.id;
-        final json = cart.toJson();
-        await doc.set(json);
-        Get.snackbar(
-          "Hurray!!",
-          "Product Added to cart",
-          snackPosition: SnackPosition.BOTTOM,
-        );
-      } else {
-        log("Already exist");
-        final doc = firebaseInstance
-            .collection('cartproducts')
-            .doc(cartController.currentCartProduct.id);
-        doc.update({
-          'quantity':
-              cart.quantity + cartController.currentCartProduct.quantity,
-        });
-         Get.snackbar(
-          "Hurray!!",
-          "Product Added to cart",
-          snackPosition: SnackPosition.BOTTOM,
-        );
-      }
+    if (isEmpty) {
+      final doc = firebaseInstance.collection('cartproducts').doc();
+      cart.id = doc.id;
+      final json = cart.toJson();
+      await doc.set(json);
+      Get.snackbar(
+        "Hurray!!",
+        "Product Added to cart",
+        snackPosition: SnackPosition.BOTTOM,
+      );
+    } else {
+      log("Already exist");
+      final doc = firebaseInstance
+          .collection('cartproducts')
+          .doc(cartController.currentCartProduct.id);
+      doc.update({
+        'quantity': cart.quantity + cartController.currentCartProduct.quantity,
+      });
+      Get.snackbar(
+        "Hurray!!",
+        "Product Added to cart",
+        snackPosition: SnackPosition.BOTTOM,
+      );
+    }
     // } catch (exception) {
     //   Get.snackbar(
     //     "title",
@@ -75,10 +74,5 @@ class HomeController extends GetxController {
     // }
     isLoading = false;
     update();
-  }
-
-  sample() {
-    final docUser = firebaseInstance.collection('cartproducts').doc();
-    print(docUser.snapshots());
   }
 }

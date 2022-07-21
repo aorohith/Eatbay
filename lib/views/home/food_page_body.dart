@@ -231,7 +231,6 @@ class _FoodPageBodyState extends State<FoodPageBody> {
               padding: const EdgeInsets.only(top: 8.0),
               child: GestureDetector(
                 onTap: () {
-                  controller.sample();
                   Navigator.push(
                     context,
                     MaterialPageRoute(

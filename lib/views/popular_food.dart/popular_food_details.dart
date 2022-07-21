@@ -1,5 +1,4 @@
 import 'package:eatbay/controllers/bottomnav_controller/bottomnav_controller.dart';
-import 'package:eatbay/controllers/cart_controller.dart';
 import 'package:eatbay/controllers/home_controller.dart';
 import 'package:eatbay/models/cart_model.dart';
 import 'package:eatbay/models/product_model.dart';

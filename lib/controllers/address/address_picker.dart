@@ -71,6 +71,7 @@ class AddressPickerController extends GetxController {
         latitude,
         longitude,
       );
+      
       return placemark;
     } else {
       Get.snackbar("Alert", "Please select current location");
