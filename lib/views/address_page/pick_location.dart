@@ -1,6 +1,7 @@
 import 'package:eatbay/controllers/address/address_picker.dart';
 import 'package:eatbay/views/address_page/widgets/address_trigger_button.dart';
 import 'package:flutter/material.dart';
+import 'package:geocoding/geocoding.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
@@ -12,39 +13,6 @@ class PickLocationScreen extends StatefulWidget {
 
 class PickLocationScreenState extends State<PickLocationScreen> {
   final addressController = Get.put(AddressPickerController());
-
-  // static final Marker _kLakeMarker = Marker(
-  //   markerId: const MarkerId('kLakeMarker'),
-  //   infoWindow: const InfoWindow(title: "Lake Marker"),
-  //   icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueBlue),
-  //   position: const LatLng(9.791129, 76.746728),
-  // );
-
-  // static const CameraPosition _kLake = CameraPosition(
-  //     bearing: 192.8334901395799,
-  //     target: LatLng(37.43296265331129, -122.08832357078792),
-  //     tilt: 59.440717697143555,
-  //     zoom: 19.151926040649414);
-
-  // static final Polyline _kPolyline = const Polyline(
-  //     polylineId: PolylineId('_kPolyline'),
-  //     points: [
-  //        LatLng(37.42796133580664, -122.085749655962),
-  //       LatLng(37.43296265331129, -122.08832357078792),
-  //     ],
-  //     width: 5);
-
-  // static final Polygon _kPolygon = Polygon(
-  //   polygonId: PolygonId('_kPolygon'),
-  //   points: [
-  //       LatLng(37.43296265331129, -122.08832357078792),
-  //       LatLng(37.418, -122.092),
-  //       LatLng(37.435, -122.092),
-  //   ],
-  //   strokeWidth: 5,
-  //   fillColor: Colors.transparent
-  // );
-
   @override
   Widget build(BuildContext context) {
     return GetBuilder<AddressPickerController>(
@@ -64,8 +32,6 @@ class PickLocationScreenState extends State<PickLocationScreen> {
                 onTap: (LatLng latLng) {
                   addressController.onTapMarker(latLng);
                 },
-                // polylines: {_kPolyline},
-                // polygons: {_kPolygon},
                 zoomControlsEnabled: false,
                 myLocationEnabled: true,
                 myLocationButtonEnabled: true,
@@ -100,17 +66,12 @@ class PickLocationScreenState extends State<PickLocationScreen> {
           ),
           label: const Text(
             "Use Current Location",
-            style: const TextStyle(color: Colors.red),
+            style: TextStyle(color: Colors.red),
           ),
         ),
       ),
     );
   }
-
-  // Future<void> _goToTheLake() async {
-  //   final GoogleMapController controller = await _controller.future;
-  //   controller.animateCamera(CameraUpdate.newCameraPosition(_kLake));
-  // }
 
   Align bottomSection() {
     return Align(
@@ -164,15 +125,20 @@ class PickLocationScreenState extends State<PickLocationScreen> {
     );
   }
 
-  ListView placeListTile(placemark) {
+  ListView placeListTile(List<Placemark> placemark) {
     return ListView.separated(
       itemBuilder: (context, index) => GestureDetector(
         onTap: () {
+
           addressController.addAddress();
           Get.back();
         },
         child: Card(
           child: ListTile(
+            onTap: (){
+              String? address = "${placemark[index].name}, ${placemark[index].street}, ${placemark[index].locality}" ;
+              addressController.addressController.text = address;
+            },
             title: Text(placemark[index].name.toString()),
             subtitle: Text(placemark[index].locality.toString()),
           ),

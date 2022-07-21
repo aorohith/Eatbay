@@ -95,16 +95,16 @@ class CartScreen extends StatelessWidget {
           Row(
             children: [
               Container(
-                height: 100,
-                width: 100,
+                height: 50,
+                width: 50,
                 decoration: BoxDecoration(
-                  image: const DecorationImage(
+                  image: DecorationImage(
                     image: NetworkImage(
-                      "https://t4.ftcdn.net/jpg/04/36/36/57/360_F_436365754_z3i5Es0sFmZuLY6GZIzdiU01v9HqpGZe.jpg",
+                      cartProduct.product.imageUrl,
                     ),
                     fit: BoxFit.cover,
                   ),
-                  borderRadius: BorderRadius.circular(15),
+                  borderRadius: BorderRadius.circular(5),
                 ),
               ),
               Padding(

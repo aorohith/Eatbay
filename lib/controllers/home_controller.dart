@@ -1,14 +1,17 @@
 import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:eatbay/controllers/bottomnav_controller/bottomnav_controller.dart';
 import 'package:eatbay/controllers/cart_controller.dart';
 import 'package:eatbay/controllers/services/cart_api/cart_apis.dart';
 import 'package:eatbay/models/cart_model.dart';
 import 'package:eatbay/models/product_model.dart';
+import 'package:eatbay/views/bottom_nav_bar/bottom_nav.dart';
 import 'package:get/get.dart';
 
 class HomeController extends GetxController {
   final cartController = Get.put(CartController());
+  final bottomNavController = Get.put(BottomnavController());
 
   var isLoading = false;
   RxList<Product> products = RxList<Product>([]);
@@ -36,10 +39,7 @@ class HomeController extends GetxController {
 //add product from popular detail section
   addToCart(Cart cart) async {
     isLoading = true;
-    // try {
-    //check product is in collection or not? true return when empty
-    // await checkWholeCartIsEmpty();
-    //check cart is empty or not for the current user also return true when empty
+    try {
     bool isEmpty = await checkUserCartIsEmpty(cart);
     // log(isEmpty.toString());
     if (isEmpty) {
@@ -53,7 +53,6 @@ class HomeController extends GetxController {
         snackPosition: SnackPosition.BOTTOM,
       );
     } else {
-      log("Already exist");
       final doc = firebaseInstance
           .collection('cartproducts')
           .doc(cartController.currentCartProduct.id);
@@ -66,14 +65,13 @@ class HomeController extends GetxController {
         snackPosition: SnackPosition.BOTTOM,
       );
     }
-    // } catch (exception) {
-    //   Get.snackbar(
-    //     "title",
-    //     exception.toString(),
-    //     snackPosition: SnackPosition.BOTTOM,
-    //   );
-    //   log(exception.toString());
-    // }
+    } catch (exception) {
+      Get.snackbar(
+        "Error occured",
+        exception.toString(),
+        snackPosition: SnackPosition.BOTTOM,
+      );
+    }
     isLoading = false;
     update();
   }

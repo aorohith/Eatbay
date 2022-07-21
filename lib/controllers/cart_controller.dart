@@ -10,14 +10,10 @@ class CartController extends GetxController {
   var temperory = 0.obs;
   final firebaseInstance = FirebaseFirestore.instance;
 
-
   @override
   onInit() {
     if (FirebaseAuth.instance.currentUser != null) {
       cartProducts.bindStream(getCartProducts());
-      debounce(temperory, (value) {
-        updateData(value);
-      });
     }
     super.onInit();
   }
@@ -37,31 +33,38 @@ class CartController extends GetxController {
   }
 
   incrementCount(Cart cart) {
+    currentCartProduct = cart;
     cart.quantity++;
     cart.totalPrice = cart.quantity * cart.product.price;
     temperory.value = cart.quantity;
+    debounce(temperory, (value) {
+      updateData(value);
+    });
     update();
   }
 
   decrementCount(Cart cart) {
+    currentCartProduct = cart;
     if (cart.quantity > 1) {
       cart.quantity--;
       cart.totalPrice = cart.quantity * cart.product.price;
+      temperory.value = cart.quantity;
+      debounce(temperory, (value) {
+        updateData(value);
+      });
     } else {
       Get.snackbar("title", "Cannot be less than 1");
     }
+
     update();
   }
 
-  updateData(value){
-    print(value);
-     final doc = firebaseInstance
-            .collection('cartproducts')
-            .doc(currentCartProduct.id);
-        doc.update({
-          'quantity':
-              value,
-        });
-        print('Done');
+  updateData(value) {
+    final doc =
+        firebaseInstance.collection('cartproducts').doc(currentCartProduct.id);
+    doc.update({
+      'quantity': value,
+    });
+    print('Done');
   }
 }
