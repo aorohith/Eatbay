@@ -17,6 +17,7 @@ class CartScreen extends StatelessWidget {
   final currentUser = FirebaseAuth.instance.currentUser;
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -174,7 +175,7 @@ class CartScreen extends StatelessWidget {
         ),
         GestureDetector(
           onTap: () {
-            Get.to( SelectAddressScreen());
+            Get.to(SelectAddressScreen());
           },
           child: Container(
             margin: const EdgeInsets.only(bottom: 10),
@@ -183,15 +184,15 @@ class CartScreen extends StatelessWidget {
             decoration: BoxDecoration(
                 color: Colors.redAccent,
                 borderRadius: BorderRadius.circular(5)),
-            child: const Center(
+            child: Center(
               child: Center(
-                child: Text(
-                  "Rs 500",
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20),
-                ),
+                child: Obx(() => Text(
+                      cartController.cartGrandTotal.value.toString(),
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20),
+                    )),
               ),
             ),
           ),

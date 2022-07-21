@@ -1,4 +1,4 @@
-import 'package:eatbay/controllers/address/address_picker.dart';
+import 'package:eatbay/controllers/address/address_picker_controller.dart';
 import 'package:eatbay/views/address_page/widgets/address_trigger_button.dart';
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
@@ -34,7 +34,6 @@ class PickLocationScreenState extends State<PickLocationScreen> {
                 },
                 zoomControlsEnabled: false,
                 myLocationEnabled: true,
-                myLocationButtonEnabled: true,
               ),
               search(),
               currentLocation(),
@@ -87,35 +86,30 @@ class PickLocationScreenState extends State<PickLocationScreen> {
             )),
         child: Column(
           children: [
-            TextButton(
-              onPressed: () async {
+            AddressTriggerButton(
+              onClick: () async {
                 var placemark = await addressController.getPlaceSuggesion();
                 Get.defaultDialog(
                   title: "Select Address",
                   content: SizedBox(
-                      height: 300,
-                      width: 300,
-                      child: Column(
-                        children: [
-                          Expanded(
-                            child: placeListTile(placemark),
+                    height: 300,
+                    width: 300,
+                    child: Column(
+                      children: [
+                        Expanded(
+                          child: placeListTile(placemark),
+                        ),
+                        SizedBox(
+                          width: double.infinity,
+                          child: ElevatedButton(
+                            onPressed: () {},
+                            child: const Text("Just Select Location"),
                           ),
-                          SizedBox(
-                            width: double.infinity,
-                            child: ElevatedButton(
-                              onPressed: () {},
-                              child: const Text("Just Select Location"),
-                            ),
-                          )
-                        ],
-                      )),
+                        )
+                      ],
+                    ),
+                  ),
                 );
-              },
-              child: const Text("Select Place"),
-            ),
-            AddressTriggerButton(
-              onClick: () {
-                addressBottomSheet();
               },
               text: 'Enter Complete Addresses',
             ),
@@ -129,15 +123,17 @@ class PickLocationScreenState extends State<PickLocationScreen> {
     return ListView.separated(
       itemBuilder: (context, index) => GestureDetector(
         onTap: () {
-
           addressController.addAddress();
           Get.back();
         },
         child: Card(
           child: ListTile(
-            onTap: (){
-              String? address = "${placemark[index].name}, ${placemark[index].street}, ${placemark[index].locality}" ;
+            onTap: () {
+              String? address =
+                  "${placemark[index].name}, ${placemark[index].street}, ${placemark[index].locality}";
               addressController.addressController.text = address;
+              Get.back();
+              addressBottomSheet();
             },
             title: Text(placemark[index].name.toString()),
             subtitle: Text(placemark[index].locality.toString()),

@@ -3,10 +3,10 @@ import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:eatbay/controllers/bottomnav_controller/bottomnav_controller.dart';
 import 'package:eatbay/controllers/cart_controller.dart';
-import 'package:eatbay/controllers/services/cart_api/cart_apis.dart';
+import 'package:eatbay/services/cart_apis.dart';
 import 'package:eatbay/models/cart_model.dart';
 import 'package:eatbay/models/product_model.dart';
-import 'package:eatbay/views/bottom_nav_bar/bottom_nav.dart';
+import 'package:eatbay/services/firestore_db.dart';
 import 'package:get/get.dart';
 
 class HomeController extends GetxController {
@@ -17,54 +17,51 @@ class HomeController extends GetxController {
   RxList<Product> products = RxList<Product>([]);
   var quantity = 1.obs;
   final firebaseInstance = FirebaseFirestore.instance;
-  
 
   @override
   void onInit() {
-    products.bindStream(getProducts());
+    try {
+      isLoading = true;
+      products.bindStream(FirestoreDB().getProducts());
+    } catch (e) {
+      Get.snackbar("Error", "An error Occured ${e.toString()}");
+    }
+    isLoading = false;
     super.onInit();
   }
 
-  Stream<List<Product>> getProducts() {
-    isLoading = true;
-    Stream<List<Product>> temp;
-    temp = FirebaseFirestore.instance.collection('productlist').snapshots().map(
-        (snapshot) =>
-            snapshot.docs.map((doc) => Product.fromJson(doc.data())).toList());
-    isLoading = false;
-    update();
-    return temp;
-  }
+ 
 
 //add product from popular detail section
   addToCart(Cart cart) async {
     isLoading = true;
     try {
-    bool isEmpty = await checkUserCartIsEmpty(cart);
-    // log(isEmpty.toString());
-    if (isEmpty) {
-      final doc = firebaseInstance.collection('cartproducts').doc();
-      cart.id = doc.id;
-      final json = cart.toJson();
-      await doc.set(json);
-      Get.snackbar(
-        "Hurray!!",
-        "Product Added to cart",
-        snackPosition: SnackPosition.BOTTOM,
-      );
-    } else {
-      final doc = firebaseInstance
-          .collection('cartproducts')
-          .doc(cartController.currentCartProduct.id);
-      doc.update({
-        'quantity': cart.quantity + cartController.currentCartProduct.quantity,
-      });
-      Get.snackbar(
-        "Hurray!!",
-        "Product Added to cart",
-        snackPosition: SnackPosition.BOTTOM,
-      );
-    }
+      bool isEmpty = await checkUserCartIsEmpty(cart);
+      // log(isEmpty.toString());
+      if (isEmpty) {
+        final doc = firebaseInstance.collection('cartproducts').doc();
+        cart.id = doc.id;
+        final json = cart.toJson();
+        await doc.set(json);
+        Get.snackbar(
+          "Hurray!!",
+          "Product Added to cart",
+          snackPosition: SnackPosition.BOTTOM,
+        );
+      } else {
+        final doc = firebaseInstance
+            .collection('cartproducts')
+            .doc(cartController.currentCartProduct.id);
+        doc.update({
+          'quantity':
+              cart.quantity + cartController.currentCartProduct.quantity,
+        });
+        Get.snackbar(
+          "Hurray!!",
+          "Product Added to cart",
+          snackPosition: SnackPosition.BOTTOM,
+        );
+      }
     } catch (exception) {
       Get.snackbar(
         "Error occured",

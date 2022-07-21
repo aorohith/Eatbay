@@ -14,13 +14,14 @@ class SelectAddressScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    int selectedIndex = 0;
     return Scaffold(
       appBar: AppBar(
         title: const Text("Select Address"),
         actions: [
           IconButton(
             onPressed: () {
-              Get.to(()=>PickLocationScreen());
+              Get.to(() => PickLocationScreen());
             },
             icon: Icon(Icons.add),
           ),
@@ -31,17 +32,18 @@ class SelectAddressScreen extends StatelessWidget {
           padding: const EdgeInsets.all(10),
           child: Column(
             children: [
-              topAddressTypeButton(),
+              // topAddressTypeButton(),
               h20,
-              Expanded(
-                child: ListView.separated(
-                  itemBuilder: (context, index) => selectAddressCards(
-                    address: addressController.address[index],
-                  ),
-                  separatorBuilder: (context, index) => Divider(),
-                  itemCount: addressController.address.length,
-                ),
-              ),
+              Obx(() => Expanded(
+                    child: ListView.separated(
+                      itemBuilder: (context, index) => selectAddressCards(
+                        index: index,
+                        address: addressController.address[index],
+                      ),
+                      separatorBuilder: (context, index) => Divider(),
+                      itemCount: addressController.address.length,
+                    ),
+                  )),
               h20,
               LoginButton(text: "Select", onClick: () {})
             ],
@@ -65,35 +67,45 @@ class SelectAddressScreen extends StatelessWidget {
     );
   }
 
-  Card selectAddressCards(
-      {required AddressModel address, Color color = Colors.white}) {
-    return Card(
-      color: color,
-      elevation: 5,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-      child: SizedBox(
-        width: double.infinity,
-        height: 100,
-        child: Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                address.contactPerson,
-                style:
-                    const TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
+  GestureDetector selectAddressCards({
+    required AddressModel address,
+    required int index,
+  }) {
+    return GestureDetector(
+      onTap: () {
+        addressController.selectAddress(index);
+      },
+      child: Obx(() => Card(
+            color: addressController.selectedIndex.value == index
+                ? AppColors.mainColor
+                : const Color(0xffffffff),
+            elevation: 5,
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+            child: SizedBox(
+              width: double.infinity,
+              height: 100,
+              child: Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      address.contactPerson,
+                      style: const TextStyle(
+                          fontSize: 17, fontWeight: FontWeight.bold),
+                    ),
+                    Text(address.phone),
+                    Text(
+                      address.address,
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 3,
+                    ),
+                  ],
+                ),
               ),
-              Text(address.phone),
-              Text(
-                address.address,
-                overflow: TextOverflow.ellipsis,
-                maxLines: 3,
-              ),
-            ],
-          ),
-        ),
-      ),
+            ),
+          )),
     );
   }
 }

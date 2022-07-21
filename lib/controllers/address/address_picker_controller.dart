@@ -88,7 +88,6 @@ class AddressPickerController extends GetxController {
       position: LatLng(latitude, longitude),
     );
     markers.add(newMarker);
-    print(markers.length);
     update();
   }
 

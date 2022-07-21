@@ -1,5 +1,5 @@
 import 'package:eatbay/controllers/address/address_controller.dart';
-import 'package:eatbay/controllers/address/address_picker.dart';
+import 'package:eatbay/controllers/address/address_picker_controller.dart';
 import 'package:eatbay/views/address_page/widgets/address_input.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -73,6 +73,7 @@ addressBottomSheet() {
                     ).toList(),
                     onChanged: (value) {
                       addressController.changeDropdown(value.toString());
+                      Get.back();
                     },
                     value: addressController.currentDropdown,
                   ),

@@ -1,4 +1,4 @@
-import 'package:eatbay/controllers/address/address_picker.dart';
+import 'package:eatbay/controllers/address/address_picker_controller.dart';
 import 'package:eatbay/views/widgets/address_icons.dart';
 import 'package:eatbay/views/widgets/big_text.dart';
 import 'package:eatbay/views/widgets/core/colors.dart';

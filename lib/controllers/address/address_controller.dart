@@ -1,41 +1,36 @@
-import 'dart:developer';
-
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:eatbay/models/address_model.dart';
+import 'package:eatbay/services/firestore_db.dart';
 import 'package:get/get.dart';
 
 class AddressController extends GetxController {
-  RxList<AddressModel> address = RxList<AddressModel>([]);
+  var address = <AddressModel>[].obs;
   bool isLoading = false;
+  var selectedIndex = 0.obs;
 
-  List<String> addressType = [
-    'Home','Work','Hotel','Other'
-  ];
+  List<String> addressType = ['Home', 'Work', 'Hotel', 'Other'];
+
   String currentDropdown = 'Home';
   int newSelectedIndex = 0;
   int prevSelectedIndex = 1;
 
-  changeDropdown(String value){
+  @override
+  void onInit() {
+    try {
+      isLoading = true;
+      address.bindStream(FirestoreDB().getAddress());
+    } catch (e) {
+      Get.snackbar("Error", "An error Occured ${e.toString()}");
+    }
+      isLoading = false;
+    super.onInit();
+  }
+
+  changeDropdown(String value) {
     currentDropdown = value;
     update();
   }
 
-  @override
-  void onReady() {
-    address.bindStream(getAddress());
-    super.onReady();
-  }
-
-  Stream<List<AddressModel>> getAddress() {
-    isLoading = true;
-    Stream<List<AddressModel>> temp;
-    temp = FirebaseFirestore.instance.collection('addresses').snapshots().map(
-        (snapshot) => snapshot.docs
-            .map((doc) => AddressModel.fromJson(doc.data()))
-            .toList());
-            log(temp.toString());
-    isLoading = false;
-    update();
-    return temp;
+  selectAddress(int index) {
+    selectedIndex.value = index;
   }
 }

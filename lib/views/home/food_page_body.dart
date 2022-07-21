@@ -217,94 +217,98 @@ class _FoodPageBodyState extends State<FoodPageBody> {
 
   popularTiles() {
     final controller = Get.put(HomeController());
-    return Obx((){
-      if(controller.isLoading){
-        return CircularProgressIndicator();
-      }
-      return ListView.builder(
-          shrinkWrap: true,
-          physics: const NeverScrollableScrollPhysics(),
-          itemCount: controller.products.length,
-          itemBuilder: (context, index) {
-            Product product = controller.products[index];
-            return Padding(
-              padding: const EdgeInsets.only(top: 8.0),
-              child: GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => PopularFoodDetail(product: product,),
+    return controller.isLoading
+        ? const CircularProgressIndicator()
+        : Obx(
+            () {
+              return ListView.builder(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                itemCount: controller.products.length,
+                itemBuilder: (context, index) {
+                  Product product = controller.products[index];
+                  return Padding(
+                    padding: const EdgeInsets.only(top: 8.0),
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => PopularFoodDetail(
+                              product: product,
+                            ),
+                          ),
+                        );
+                      },
+                      child: Container(
+                        margin: const EdgeInsets.only(left: 20, right: 20),
+                        child: Row(
+                          children: [
+                            Container(
+                              height: 120,
+                              width: 120,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20),
+                                color: Colors.white,
+                                image: DecorationImage(
+                                  fit: BoxFit.cover,
+                                  image: NetworkImage(product.imageUrl),
+                                ),
+                              ),
+                            ),
+                            Container(
+                              width: 200,
+                              height: 100,
+                              decoration: const BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.only(
+                                  topRight: Radius.circular(20),
+                                  bottomRight: Radius.circular(20),
+                                ),
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Column(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceAround,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    BigText(
+                                      text: product.name,
+                                    ),
+                                    SmallText(text: "With cheeze"),
+                                    Row(
+                                      children: [
+                                        IconAndTextWidget(
+                                          icon: Icons.circle,
+                                          iconColor: Colors.orange,
+                                          text: 'Normal',
+                                        ),
+                                        IconAndTextWidget(
+                                          icon: Icons.location_on,
+                                          iconColor: Colors.green,
+                                          text: '5 km',
+                                        ),
+                                        IconAndTextWidget(
+                                          icon: Icons.timelapse,
+                                          iconColor: Colors.red,
+                                          text: '42min',
+                                        )
+                                      ],
+                                    )
+                                  ],
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
                     ),
                   );
                 },
-                child: Container(
-                  margin: const EdgeInsets.only(left: 20, right: 20),
-                  child: Row(
-                    children: [
-                      Container(
-                        height: 120,
-                        width: 120,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          color: Colors.white,
-                          image: DecorationImage(
-                            fit: BoxFit.cover,
-                            image: NetworkImage(product.imageUrl),
-                          ),
-                        ),
-                      ),
-                      Container(
-                        width: 200,
-                        height: 100,
-                        decoration: const BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.only(
-                            topRight: Radius.circular(20),
-                            bottomRight: Radius.circular(20),
-                          ),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              BigText(
-                                text: product.name,
-                              ),
-                              SmallText(text: "With cheeze"),
-                              Row(
-                                children: [
-                                  IconAndTextWidget(
-                                    icon: Icons.circle,
-                                    iconColor: Colors.orange,
-                                    text: 'Normal',
-                                  ),
-                                  IconAndTextWidget(
-                                    icon: Icons.location_on,
-                                    iconColor: Colors.green,
-                                    text: '5 km',
-                                  ),
-                                  IconAndTextWidget(
-                                    icon: Icons.timelapse,
-                                    iconColor: Colors.red,
-                                    text: '42min',
-                                  )
-                                ],
-                              )
-                            ],
-                          ),
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-              ),
-            );
-          },
-        );
-    } );
+              );
+            },
+          );
   }
 
   @override

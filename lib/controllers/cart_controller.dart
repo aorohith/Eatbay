@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:eatbay/models/cart_model.dart';
+import 'package:eatbay/services/firestore_db.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 
@@ -9,27 +10,29 @@ class CartController extends GetxController {
   late Cart currentCartProduct;
   var temperory = 0.obs;
   final firebaseInstance = FirebaseFirestore.instance;
+  var cartGrandTotal=0.0.obs;
 
   @override
   onInit() {
     if (FirebaseAuth.instance.currentUser != null) {
-      cartProducts.bindStream(getCartProducts());
+      try {
+      isLoading = true;
+        cartProducts.bindStream(FirestoreDB().getCartProducts());
+      } catch (e) {
+        Get.snackbar("Error", "An error Occured ${e.toString()}");
+      }
     }
+      isLoading = false;
     super.onInit();
   }
 
-  Stream<List<Cart>> getCartProducts() {
-    isLoading = true;
-    var temp;
-    temp = FirebaseFirestore.instance
-        .collection('cartproducts')
-        .where('user_id', isEqualTo: FirebaseAuth.instance.currentUser!.uid)
-        .snapshots()
-        .map((snapshot) =>
-            snapshot.docs.map((doc) => Cart.fromJson(doc.data())).toList());
-    isLoading = false;
-    update();
-    return temp;
+
+  initialGrandTotal() {
+    cartProducts.map((element) {
+      cartGrandTotal.value =
+          cartGrandTotal.value + element.quantity * element.product.price;
+    });
+     update();
   }
 
   incrementCount(Cart cart) {
@@ -37,9 +40,10 @@ class CartController extends GetxController {
     cart.quantity++;
     cart.totalPrice = cart.quantity * cart.product.price;
     temperory.value = cart.quantity;
-    debounce(temperory, (value) {
-      updateData(value);
-    });
+    cartGrandTotal.value = cartGrandTotal.value + cart.product.price;
+    // debounce(temperory, (value) {
+    //   updateData(value);
+    // });
     update();
   }
 
@@ -49,9 +53,10 @@ class CartController extends GetxController {
       cart.quantity--;
       cart.totalPrice = cart.quantity * cart.product.price;
       temperory.value = cart.quantity;
-      debounce(temperory, (value) {
-        updateData(value);
-      });
+      cartGrandTotal.value = cartGrandTotal.value - cart.product.price;
+      // debounce(temperory, (value) {
+      //   updateData(value);
+      // });
     } else {
       Get.snackbar("title", "Cannot be less than 1");
     }
@@ -59,12 +64,20 @@ class CartController extends GetxController {
     update();
   }
 
+  getCartTotal() {
+    cartProducts.value.map((e) {
+      cartGrandTotal.value=  cartGrandTotal.value + e.quantity * e.product.price;
+    });
+  }
+
   updateData(value) {
     final doc =
         firebaseInstance.collection('cartproducts').doc(currentCartProduct.id);
     doc.update({
       'quantity': value,
+      'total_price': currentCartProduct.totalPrice
     });
     print('Done');
   }
+ 
 }
