@@ -83,6 +83,7 @@ class CartScreen extends StatelessWidget {
   }
 
   SizedBox cartContainer(Cart cartProduct) {
+    cartController.currentCartProduct = cartProduct;
     return SizedBox(
       height: 120,
       child: Row(
@@ -117,7 +118,7 @@ class CartScreen extends StatelessWidget {
                     ),
                     SmallText(text: "Spicy"),
                     BigText(
-                      text: '₹ ${cartProduct.totalPrice}',
+                      text: '₹ ${cartProduct.product.price*cartProduct.quantity}',
                       color: Colors.red,
                     ),
                   ],

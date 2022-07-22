@@ -6,7 +6,6 @@ import 'package:eatbay/services/cart_apis.dart';
 import 'package:eatbay/services/firestore_db.dart';
 import 'package:eatbay/views/cart/widgets/cart_delete_popup.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class CartController extends GetxController {
