@@ -1,6 +1,7 @@
 import 'package:eatbay/views/widgets/rectangle_button.dart';
 import 'package:eatbay/views/widgets/small_text.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'payment_success_page.dart';
 
 class PaypalLoginScreen extends StatelessWidget {
@@ -50,7 +51,12 @@ class PaypalLoginScreen extends StatelessWidget {
               SizedBox(
                 height: 40,
               ),
-              RectangleButton(text: "Login", context: context),
+              RectangleButton(
+                  text: "Login",
+                  context: context,
+                  onClick: () {
+                    Get.to(() => PaymentSuccessPage());
+                  }),
               const SizedBox(
                 height: 40,
               ),
@@ -75,7 +81,9 @@ class PaypalLoginScreen extends StatelessWidget {
                   text: "Create an Account",
                   bgColor: const Color.fromARGB(255, 231, 230, 230),
                   textColor: Colors.black,
-                  context: context),
+                  context: context,
+                  onClick: (){},
+                  ),
             ],
           ),
         ),

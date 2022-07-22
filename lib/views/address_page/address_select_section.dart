@@ -1,6 +1,7 @@
 import 'package:eatbay/controllers/address/address_controller.dart';
 import 'package:eatbay/models/address_model.dart';
 import 'package:eatbay/views/address_page/pick_location.dart';
+import 'package:eatbay/views/payment_pages/payment_method.dart';
 import 'package:eatbay/views/widgets/address_icons.dart';
 import 'package:eatbay/views/widgets/core/colors.dart';
 import 'package:eatbay/views/widgets/core/constant.dart';
@@ -45,7 +46,7 @@ class SelectAddressScreen extends StatelessWidget {
                     ),
                   )),
               h20,
-              LoginButton(text: "Select", onClick: () {})
+              LoginButton(text: "Select", onClick: () {Get.to(()=>PaymentMethodScreen());})
             ],
           ),
         ),
