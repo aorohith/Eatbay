@@ -2,7 +2,7 @@ import 'package:eatbay/views/widgets/big_text.dart';
 import 'package:flutter/material.dart';
 import 'package:timeline_tile/timeline_tile.dart';
 
-class OrderStatus extends StatelessWidget {
+class OrderStatusWidget extends StatelessWidget {
   String text;
   bool isLast;
   bool isStart;
@@ -10,7 +10,7 @@ class OrderStatus extends StatelessWidget {
   Color beforeLineColor;
   Color afterLineColor;
 
-  OrderStatus({
+  OrderStatusWidget({
     Key? key,
     required this.text,
     this.isLast = false,

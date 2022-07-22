@@ -1,5 +1,5 @@
 import 'package:eatbay/views/payment_pages/paypal_login.dart';
-import 'package:eatbay/views/widgets/core/colors.dart';
+import 'package:eatbay/views/core/colors.dart';
 import 'package:flutter/material.dart';
 
 class PaymentMethodScreen extends StatelessWidget {

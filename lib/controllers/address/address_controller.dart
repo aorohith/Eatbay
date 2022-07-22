@@ -6,6 +6,7 @@ class AddressController extends GetxController {
   var address = <AddressModel>[].obs;
   bool isLoading = false;
   var selectedIndex = 0.obs;
+  late AddressModel selectedAddress;
 
   List<String> addressType = ['Home', 'Work', 'Hotel', 'Other'];
 
@@ -21,7 +22,8 @@ class AddressController extends GetxController {
     } catch (e) {
       Get.snackbar("Error", "An error Occured ${e.toString()}");
     }
-      isLoading = false;
+    isLoading = false;
+    selectedAddress = address.first;
     super.onInit();
   }
 
@@ -30,7 +32,8 @@ class AddressController extends GetxController {
     update();
   }
 
-  selectAddress(int index) {
+  selectAddress({required int index, required AddressModel address}) {
     selectedIndex.value = index;
+    selectedAddress = address;
   }
 }

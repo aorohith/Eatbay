@@ -1,7 +1,7 @@
 import 'package:eatbay/controllers/auth_controller/auth_controller.dart';
 import 'package:eatbay/views/auth_pages/signup_page.dart/signup.dart';
 import 'package:eatbay/views/widgets/big_text.dart';
-import 'package:eatbay/views/widgets/core/constant.dart';
+import 'package:eatbay/views/core/constant.dart';
 import 'package:eatbay/views/widgets/icon_text_filed.dart';
 import 'package:eatbay/views/widgets/signin_button.dart';
 import 'package:eatbay/views/widgets/signup_or_signin_with.dart';

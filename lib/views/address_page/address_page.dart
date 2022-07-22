@@ -1,7 +1,7 @@
 import 'package:eatbay/controllers/address/address_picker_controller.dart';
 import 'package:eatbay/views/widgets/address_icons.dart';
 import 'package:eatbay/views/widgets/big_text.dart';
-import 'package:eatbay/views/widgets/core/colors.dart';
+import 'package:eatbay/views/core/colors.dart';
 import 'package:eatbay/views/widgets/icon_text_filed.dart';
 import 'package:eatbay/views/widgets/signin_button.dart';
 import 'package:flutter/material.dart';

@@ -15,18 +15,18 @@ class RunningOrderDetailsPage extends StatelessWidget {
           padding: const EdgeInsets.all(15.0),
           child: Column(
             children: [
-              OrderStatus(
+              OrderStatusWidget(
                   text: "Chicken Biriyani Ordered",
                   ballColor: Colors.green,
                   afterLineColor: Colors.green,
                   beforeLineColor: Colors.green),
-              OrderStatus(
+              OrderStatusWidget(
                 text: "Chicken Biriyani Prepared",
                 beforeLineColor: Colors.green,
                 ballColor: Colors.green,
               ),
-              OrderStatus(text: "Chicken Biriyani On the way"),
-              OrderStatus(
+              OrderStatusWidget(text: "Chicken Biriyani On the way"),
+              OrderStatusWidget(
                 text: "Chicken Biriyani Delivered",
                 isLast: true,
               ),

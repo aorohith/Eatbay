@@ -3,8 +3,8 @@ import 'package:eatbay/models/address_model.dart';
 import 'package:eatbay/views/address_page/pick_location.dart';
 import 'package:eatbay/views/payment_pages/payment_method.dart';
 import 'package:eatbay/views/widgets/address_icons.dart';
-import 'package:eatbay/views/widgets/core/colors.dart';
-import 'package:eatbay/views/widgets/core/constant.dart';
+import 'package:eatbay/views/core/colors.dart';
+import 'package:eatbay/views/core/constant.dart';
 import 'package:eatbay/views/widgets/signin_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -15,7 +15,6 @@ class SelectAddressScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    int selectedIndex = 0;
     return Scaffold(
       appBar: AppBar(
         title: const Text("Select Address"),
@@ -46,7 +45,11 @@ class SelectAddressScreen extends StatelessWidget {
                     ),
                   )),
               h20,
-              LoginButton(text: "Select", onClick: () {Get.to(()=>PaymentMethodScreen());})
+              LoginButton(
+                  text: "Select",
+                  onClick: () {
+                    Get.to(() => PaymentMethodScreen());
+                  })
             ],
           ),
         ),
@@ -74,7 +77,10 @@ class SelectAddressScreen extends StatelessWidget {
   }) {
     return GestureDetector(
       onTap: () {
-        addressController.selectAddress(index);
+        addressController.selectAddress(
+          index: index,
+          address: address,
+        );
       },
       child: Obx(() => Card(
             color: addressController.selectedIndex.value == index

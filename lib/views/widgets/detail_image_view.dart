@@ -1,5 +1,5 @@
 import 'package:eatbay/models/product_model.dart';
-import 'package:eatbay/views/widgets/core/dimensions.dart';
+import 'package:eatbay/views/core/dimensions.dart';
 import 'package:flutter/material.dart';
 
 class DetailImageSection extends StatelessWidget {

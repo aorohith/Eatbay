@@ -1,6 +1,6 @@
 import 'package:eatbay/views/home/food_page_body.dart';
 import 'package:eatbay/views/widgets/big_text.dart';
-import 'package:eatbay/views/widgets/core/colors.dart';
+import 'package:eatbay/views/core/colors.dart';
 import 'package:eatbay/views/widgets/search.dart';
 import 'package:eatbay/views/widgets/small_text.dart';
 import 'package:flutter/material.dart';

@@ -3,7 +3,7 @@ import 'package:eatbay/models/cart_model.dart';
 import 'package:eatbay/views/address_page/address_select_section.dart';
 import 'package:eatbay/views/widgets/big_text.dart';
 import 'package:eatbay/views/widgets/circle_increase_button.dart';
-import 'package:eatbay/views/widgets/core/colors.dart';
+import 'package:eatbay/views/core/colors.dart';
 import 'package:eatbay/views/widgets/round_button.dart';
 import 'package:eatbay/views/widgets/small_text.dart';
 import 'package:firebase_auth/firebase_auth.dart';

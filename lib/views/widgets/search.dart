@@ -1,4 +1,4 @@
-import 'package:eatbay/views/widgets/core/colors.dart';
+import 'package:eatbay/views/core/colors.dart';
 import 'package:flutter/material.dart';
 
 class SearchWidget extends StatelessWidget {

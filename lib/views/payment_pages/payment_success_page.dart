@@ -1,7 +1,7 @@
 import 'package:eatbay/controllers/bottomnav_controller/bottomnav_controller.dart';
 import 'package:eatbay/views/bottom_nav_bar/bottom_nav.dart';
 import 'package:eatbay/views/widgets/big_text.dart';
-import 'package:eatbay/views/widgets/core/colors.dart';
+import 'package:eatbay/views/core/colors.dart';
 import 'package:eatbay/views/widgets/rectangle_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

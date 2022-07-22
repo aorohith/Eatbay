@@ -1,6 +1,6 @@
 import 'package:eatbay/controllers/bottomnav_controller/bottomnav_binding.dart';
 import 'package:eatbay/views/bottom_nav_bar/bottom_nav.dart';
-import 'package:eatbay/views/widgets/core/colors.dart';
+import 'package:eatbay/views/core/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:firebase_core/firebase_core.dart';

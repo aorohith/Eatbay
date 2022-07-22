@@ -6,7 +6,7 @@ import 'package:eatbay/views/address_page/address_select_section.dart';
 import 'package:eatbay/views/bottom_nav_bar/bottom_nav.dart';
 import 'package:eatbay/views/widgets/big_text.dart';
 import 'package:eatbay/views/widgets/button_text.dart';
-import 'package:eatbay/views/widgets/core/colors.dart';
+import 'package:eatbay/views/core/colors.dart';
 import 'package:eatbay/views/widgets/detail_image_view.dart';
 import 'package:eatbay/views/widgets/icon_and_text_widget.dart';
 import 'package:eatbay/views/widgets/round_button.dart';

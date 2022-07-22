@@ -1,7 +1,7 @@
 import 'package:eatbay/models/product_model.dart';
 import 'package:eatbay/views/widgets/big_text.dart';
 import 'package:eatbay/views/widgets/button_text.dart';
-import 'package:eatbay/views/widgets/core/colors.dart';
+import 'package:eatbay/views/core/colors.dart';
 import 'package:eatbay/views/widgets/detail_image_view.dart';
 import 'package:eatbay/views/widgets/round_button.dart';
 import 'package:flutter/material.dart';
