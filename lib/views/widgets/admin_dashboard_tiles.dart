@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get_rx/src/rx_typedefs/rx_typedefs.dart';
 
 class AdminDashboardTile extends StatelessWidget {
-  IconData icon;
-  String text;
-  Callback onClick;
-  Color color;
-  String trailingText;
-  AdminDashboardTile({
+  final IconData icon;
+  final String text;
+  final Callback onClick;
+  final Color color;
+  final String trailingText;
+  const AdminDashboardTile({
     Key? key,
     required this.icon,
     required this.text,
@@ -46,13 +46,13 @@ class AdminDashboardTile extends StatelessWidget {
                       color: Colors.white,
                     ),
                   ),
-                  SizedBox(width: 20),
-                  Text(text,style: TextStyle(fontSize: 17,fontWeight: FontWeight.w500),),
+                  const SizedBox(width: 20),
+                  Text(text,style: const TextStyle(fontSize: 17,fontWeight: FontWeight.w500),),
                 ],
               ),
               Text(
                 trailingText,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
                 ),

@@ -11,9 +11,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class SignInPage extends StatelessWidget {
-  SignInPage({Key? key}) : super(key: key);
-  TextEditingController emailController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
+  SignInPage({super.key});
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -34,12 +34,12 @@ class SignInPage extends StatelessWidget {
               ),
             ),
             h30,
-            IconTextFiield(
+            IconTextField(
               icon: Icons.email,
               hintText: "Email",
               controller: emailController,
             ),
-            IconTextFiield(
+            IconTextField(
               icon: Icons.password,
               hintText: "Password",
               controller: passwordController,
@@ -69,11 +69,11 @@ class SignInPage extends StatelessWidget {
                     onTap: () {
                       Get.to(SignupPage());
                     },
-                    child: BigText(text: " Create")),
+                    child: const BigText(text: " Create")),
               ],
             ),
             h30,
-            AuthWithButton(),
+            const AuthWithButton(),
           ],
         ),
       ),

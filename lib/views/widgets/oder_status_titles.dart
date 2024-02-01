@@ -3,29 +3,29 @@ import 'package:flutter/material.dart';
 import 'package:timeline_tile/timeline_tile.dart';
 
 class OrderStatusWidget extends StatelessWidget {
-  String text;
-  bool isLast;
-  bool isStart;
-  Color ballColor;
-  Color beforeLineColor;
-  Color afterLineColor;
+  final String text;
+  final bool isLast;
+  final bool isStart;
+  final Color ballColor;
+  final Color beforeLineColor;
+  final Color afterLineColor;
 
-  OrderStatusWidget({
-    Key? key,
+  const OrderStatusWidget({
+    super.key,
     required this.text,
     this.isLast = false,
     this.isStart = false,
     this.ballColor = Colors.grey,
     this.beforeLineColor = Colors.grey,
     this.afterLineColor = Colors.grey,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
-    double _w = MediaQuery.of(context).size.width;
+    double w = MediaQuery.of(context).size.width;
     return Row(
       children: [
-        Container(
+        SizedBox(
           width: 30,
           height: 120,
           child: TimelineTile(
@@ -42,11 +42,9 @@ class OrderStatusWidget extends StatelessWidget {
         ),
         Container(
           height: 100,
-          width: _w * .8,
-          decoration: BoxDecoration(
-            boxShadow: [
-              
-            ],
+          width: w * .8,
+          decoration: const BoxDecoration(
+            boxShadow: [],
             borderRadius: BorderRadius.only(
                 bottomRight: Radius.circular(15),
                 topRight: Radius.circular(15)),

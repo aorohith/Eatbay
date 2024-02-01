@@ -10,7 +10,7 @@ checkUserCartIsEmpty(Cart cartObj) async {
 
   try {
     if (fireAuth != null) {
-      var contain = cartController.cartProducts.value
+      var contain = cartController.cartProducts
           .where((element) => element.product.id == cartObj.product.id)
           .toList();
       if (contain.isEmpty) {

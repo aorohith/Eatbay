@@ -6,13 +6,13 @@ import 'package:get/get.dart';
 import 'package:get/get_rx/src/rx_typedefs/rx_typedefs.dart';
 
 class AddressTriggerButton extends StatelessWidget {
-  Callback onClick;
-  String text;
+  final Callback onClick;
+  final String text;
   AddressTriggerButton({
-    Key? key,
+    super.key,
     required this.onClick,
     required this.text,
-  }) : super(key: key);
+  });
 
   final addressPickerController = Get.put(AddressPickerController());
   final addressController = Get.put(AddressController());

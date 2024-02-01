@@ -4,17 +4,16 @@ import 'package:get/get_rx/src/rx_typedefs/rx_typedefs.dart';
 import 'big_text.dart';
 
 class ProfileTiles extends StatelessWidget {
-  IconData icon;
-  String text;
-  Callback onClick;
-  Color color;
-  ProfileTiles({
-    Key? key,
-    required this.icon,
+  final IconData icon;
+  final String text;
+  final Callback onClick;
+  final Color color;
+  const ProfileTiles(
+      {super.key,
+      required this.icon,
       required this.text,
       required this.onClick,
-      this.color = AppColors.mainColor
-  }) : super(key: key);
+      this.color = AppColors.mainColor});
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +41,7 @@ class ProfileTiles extends StatelessWidget {
                   color: Colors.white,
                 ),
               ),
-              SizedBox(width: 20),
+              const SizedBox(width: 20),
               BigText(text: text),
             ],
           ),

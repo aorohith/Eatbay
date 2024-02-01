@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
 class AddressIcons extends StatelessWidget {
-  IconData icon;
-  Color color;
+  final IconData icon;
+  final Color color;
 
-  AddressIcons({
+  const AddressIcons({
     Key? key,
     required this.icon,
     this.color = Colors.grey,

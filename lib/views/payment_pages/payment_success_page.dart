@@ -1,4 +1,4 @@
-import 'package:eatbay/controllers/bottomnav_controller/bottomnav_controller.dart';
+import 'package:eatbay/controllers/bottom_nav_controller/bottom_nav_controller.dart';
 import 'package:eatbay/views/bottom_nav_bar/bottom_nav.dart';
 import 'package:eatbay/views/widgets/big_text.dart';
 import 'package:eatbay/views/core/colors.dart';
@@ -9,7 +9,7 @@ import 'package:get/get.dart';
 class PaymentSuccessPage extends StatelessWidget {
   PaymentSuccessPage({Key? key}) : super(key: key);
 
-  final bottomController = Get.find<BottomnavController>();
+  final bottomController = Get.find<BottomNavController>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(

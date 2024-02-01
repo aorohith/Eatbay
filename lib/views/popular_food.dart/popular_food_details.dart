@@ -1,4 +1,4 @@
-import 'package:eatbay/controllers/bottomnav_controller/bottomnav_controller.dart';
+import 'package:eatbay/controllers/bottom_nav_controller/bottom_nav_controller.dart';
 import 'package:eatbay/controllers/home_controller.dart';
 import 'package:eatbay/models/cart_model.dart';
 import 'package:eatbay/models/product_model.dart';
@@ -16,14 +16,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class PopularFoodDetail extends StatelessWidget {
-  Product product;
+  final Product product;
   PopularFoodDetail({
     Key? key,
     required this.product,
   }) : super(key: key);
 
   final homeController = Get.put(HomeController());
-  final bottomController = Get.put(BottomnavController());
+  final bottomController = Get.put(BottomNavController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -1,4 +1,4 @@
-import 'package:eatbay/controllers/bottomnav_controller/bottomnav_controller.dart';
+import 'package:eatbay/controllers/bottom_nav_controller/bottom_nav_controller.dart';
 import 'package:eatbay/views/auth_pages/auth_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/state_manager.dart';
@@ -7,13 +7,13 @@ import '../home/main_food_page.dart';
 import '../orders_screen.dart/orders_screen.dart';
 
 class BottomNavScreen extends StatelessWidget {
-  BottomNavScreen({
+  const BottomNavScreen({
     Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<BottomnavController>(builder: (controller) {
+    return GetBuilder<BottomNavController>(builder: (controller) {
       return Scaffold(
         body: Center(
             child: IndexedStack(

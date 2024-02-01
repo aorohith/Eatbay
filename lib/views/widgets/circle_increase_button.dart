@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get_rx/src/rx_typedefs/rx_typedefs.dart';
 
 class IncreaseButton extends StatelessWidget {
-  IconData icon;
-  Callback onClick;
-  Color iconColor;
-  IncreaseButton({
+  final IconData icon;
+  final Callback onClick;
+  final Color iconColor;
+  const IncreaseButton({
     Key? key,
     required this.icon,
     this.iconColor = Colors.black,

@@ -10,10 +10,10 @@ class OrdersController extends GetxController {
   final addressController = Get.find<AddressController>();
   var isLoading = false.obs;
 
-  var orders = <Order>[].obs;
+  var orders = <OrderModel>[].obs;
 
   addSuccessOrder() async {
-    Order order = Order(
+    OrderModel order = OrderModel(
       amount: cartController.cartGrandTotal.value,
       cartProducts: cartController.cartProducts.toList(),
       dateTime: DateTime.now(),
@@ -29,7 +29,7 @@ class OrdersController extends GetxController {
       log("$jsonData");
 
       await doc.set(jsonData);
-      log("============================d;f;adfadfdf;ds==");
+      log("============================");
 
     // } catch (e) {
       // Get.snackbar("There is an error occured", "");

@@ -5,13 +5,12 @@ import 'package:eatbay/views/widgets/signin_button.dart';
 import 'package:eatbay/views/widgets/signup_or_signin_with.dart';
 import 'package:eatbay/views/widgets/small_text.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class SignupPage extends StatelessWidget {
-  SignupPage({Key? key}) : super(key: key);
+  SignupPage({super.key});
 
-  TextEditingController emailController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -31,22 +30,22 @@ class SignupPage extends StatelessWidget {
                 ),
               ),
             ),
-            IconTextFiield(
+            IconTextField(
               icon: Icons.email,
               hintText: "Email",
               controller: emailController,
             ),
-            IconTextFiield(
+            IconTextField(
               icon: Icons.password,
               hintText: "Password",
               controller: passwordController,
               obscureText: true,
             ),
-            IconTextFiield(
+            IconTextField(
                 icon: Icons.perm_phone_msg_rounded,
                 hintText: "Phone",
                 controller: emailController),
-            IconTextFiield(
+            IconTextField(
                 icon: Icons.person,
                 hintText: "Name",
                 controller: emailController),
@@ -62,7 +61,7 @@ class SignupPage extends StatelessWidget {
             const SizedBox(
               height: 10,
             ),
-            BigText(
+            const BigText(
               text: "Have an account?",
               size: 20,
             ),
@@ -76,12 +75,10 @@ class SignupPage extends StatelessWidget {
             const SizedBox(
               height: 10,
             ),
-            AuthWithButton(),
+            const AuthWithButton(),
           ],
         ),
       ),
     );
   }
-
-  
 }

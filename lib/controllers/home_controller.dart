@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:eatbay/controllers/bottomnav_controller/bottomnav_controller.dart';
+import 'package:eatbay/controllers/bottom_nav_controller/bottom_nav_controller.dart';
 import 'package:eatbay/controllers/cart_controller.dart';
 import 'package:eatbay/services/cart_apis.dart';
 import 'package:eatbay/models/cart_model.dart';
@@ -9,7 +9,7 @@ import 'package:get/get.dart';
 
 class HomeController extends GetxController {
   final cartController = Get.find<CartController>();
-  final bottomNavController = Get.find<BottomnavController>();
+  final bottomNavController = Get.find<BottomNavController>();
 
   var isLoading = false;
   RxList<Product> products = RxList<Product>([]);

@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 
-class IconTextFiield extends StatelessWidget {
-  IconData icon;
-  String hintText;
-  var controller;
-  bool obscureText;
+class IconTextField extends StatelessWidget {
+  final IconData icon;
+  final String hintText;
+  final TextEditingController controller;
+  final bool obscureText;
 
-  IconTextFiield({
-    Key? key,
+  const IconTextField({
+    super.key,
     required this.icon,
     required this.hintText,
     required this.controller,
     this.obscureText = false,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

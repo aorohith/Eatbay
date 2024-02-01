@@ -12,7 +12,7 @@ class CartController extends GetxController {
   bool isLoading = false;
   RxList<Cart> cartProducts = RxList<Cart>([]);
   late Cart currentCartProduct; //latest updated cart value is here
-  var temperory = 0.obs;
+  var temporary = 0.obs;
   final firebaseInstance = FirebaseFirestore.instance;
   var cartGrandTotal = 0.0.obs;
 
@@ -31,8 +31,8 @@ class CartController extends GetxController {
   }
 
   grandTotalUpdate() {
-    log(cartProducts.value[0].totalPrice.toString());
-    cartProducts.value.map((e) {
+    log(cartProducts[0].totalPrice.toString());
+    cartProducts.map((e) {
       log(e.product.id);
       cartGrandTotal.value =
           cartGrandTotal.value + (e.quantity * e.product.price);
@@ -44,9 +44,9 @@ class CartController extends GetxController {
     currentCartProduct = cart;
     cart.quantity++;
     cart.totalPrice = cart.totalPrice + cart.product.price;
-    temperory.value = cart.quantity;
+    temporary.value = cart.quantity;
     cartGrandTotal.value = cartGrandTotal.value + cart.product.price;
-    // debounce(temperory, (value) {
+    // debounce(temporary, (value) {
     //   updateData(value);
     // });
     update();
@@ -57,9 +57,9 @@ class CartController extends GetxController {
     if (cart.quantity > 1) {
       cart.quantity--;
       cart.totalPrice = cart.quantity * cart.product.price;
-      temperory.value = cart.quantity;
+      temporary.value = cart.quantity;
       cartGrandTotal.value = cartGrandTotal.value - cart.product.price;
-      // debounce(temperory, (value) {
+      // debounce(temporary, (value) {
       //   updateData(value);
       // });
     } else {

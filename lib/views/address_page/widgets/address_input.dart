@@ -3,27 +3,25 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class AddressInput extends StatelessWidget {
-  TextEditingController controller;
+  final TextEditingController controller;
   final bool obscuredText;
   final IconData icon;
   final String hintText;
   final TextInputType keyboardType;
 
-  AddressInput({
-    Key? key,
-    required this.hintText,
-    required this.icon,
-    this.obscuredText = false,
-    required this.controller,
-    this.keyboardType= TextInputType.name
-  }) : super(key: key);
+  AddressInput(
+      {super.key, required this.hintText,
+      required this.icon,
+      this.obscuredText = false,
+      required this.controller,
+      this.keyboardType = TextInputType.name});
 
   final addressPickerController = Get.put(AddressPickerController());
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top:10.0),
+      padding: const EdgeInsets.only(top: 10.0),
       child: TextFormField(
         obscureText: obscuredText,
         controller: controller,

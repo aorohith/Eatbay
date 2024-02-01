@@ -2,7 +2,7 @@ import 'package:eatbay/controllers/auth_controller/auth_controller.dart';
 import 'package:eatbay/controllers/cart_controller.dart';
 import 'package:get/get.dart';
 
-class BottomnavController extends GetxController{
+class BottomNavController extends GetxController{
   AuthController authController = Get.put(AuthController());
   CartController cartController = Get.put(CartController());
   var selectedIndex = 0;

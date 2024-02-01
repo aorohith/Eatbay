@@ -1,5 +1,4 @@
 import 'package:eatbay/controllers/orders_controller.dart';
-import 'package:eatbay/models/orders.dart';
 import 'package:eatbay/views/widgets/rectangle_button.dart';
 import 'package:eatbay/views/widgets/small_text.dart';
 import 'package:flutter/material.dart';

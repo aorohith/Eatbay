@@ -3,8 +3,8 @@ import 'package:eatbay/views/core/dimensions.dart';
 import 'package:flutter/material.dart';
 
 class DetailImageSection extends StatelessWidget {
-    Product product;
-  DetailImageSection({
+    final Product product;
+ const  DetailImageSection({
     Key? key,
     required this.product
   }) : super(key: key);

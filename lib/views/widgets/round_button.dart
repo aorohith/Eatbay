@@ -2,18 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:get/get_rx/src/rx_typedefs/rx_typedefs.dart';
 
 class RoundButton extends StatelessWidget {
-  Color color;
-  IconData icon;
-  Color iconColor;
-  Callback onClick;
+  final Color color;
+  final IconData icon;
+  final Color iconColor;
+  final Callback onClick;
 
-  RoundButton({
-    Key? key,
+  const RoundButton({
+    super.key,
     this.color = const Color(0xffffffff),
     required this.icon,
-    this.iconColor=Colors.white,
+    this.iconColor = Colors.white,
     required this.onClick,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +22,7 @@ class RoundButton extends StatelessWidget {
       backgroundColor: color,
       child: IconButton(
         onPressed: onClick,
-        icon: Icon(icon,color:iconColor),
+        icon: Icon(icon, color: iconColor),
         splashRadius: 30,
       ),
     );

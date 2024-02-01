@@ -3,17 +3,17 @@ import 'package:flutter/material.dart';
 import 'package:get/get_rx/src/rx_typedefs/rx_typedefs.dart';
 
 class LoginButton extends StatelessWidget {
-  String text;
-  double textSize;
-  Color color;
-  Callback onClick;
-  LoginButton({
-    Key? key,
+  final String text;
+  final double textSize;
+  final Color color;
+  final Callback onClick;
+  const LoginButton({
+    super.key,
     this.textSize = 30,
     required this.text,
     required this.onClick,
     this.color = AppColors.mainColor,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

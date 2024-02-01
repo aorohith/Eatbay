@@ -1,7 +1,7 @@
 import 'package:eatbay/models/address_model.dart';
 import 'package:eatbay/models/cart_model.dart';
 
-class Order {
+class OrderModel {
   String id;
   double amount;
   List<Cart> cartProducts;
@@ -10,7 +10,7 @@ class Order {
   String status;
   AddressModel address;
 
-  Order({
+  OrderModel({
     this.id = '',
     required this.amount,
     required this.cartProducts,
@@ -30,7 +30,7 @@ class Order {
         'address': address.toJson(),
       };
 
-  static Order fromJson(Map<String, dynamic> json) => Order(
+  static OrderModel fromJson(Map<String, dynamic> json) => OrderModel(
         id: json['id'],
         amount: json['amount'],
         cartProducts: (json['cart_products'] as List<Cart>?)

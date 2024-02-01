@@ -21,7 +21,7 @@ class FoodPageBody extends StatefulWidget {
 
 class _FoodPageBodyState extends State<FoodPageBody> {
   PageController pageController = PageController(viewportFraction: 0.85);
-  var _currentPageValue = 0.0;
+  int _currentPageValue = 0;
   final double _scaleFactor = 0.8;
   double height = Dimensions.pageViewContainer;
 
@@ -30,7 +30,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
     super.initState();
     pageController.addListener(() {
       setState(() {
-        _currentPageValue = pageController.page!;
+        _currentPageValue = (pageController.page!).toInt();
       });
     });
   }

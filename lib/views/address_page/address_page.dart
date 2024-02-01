@@ -9,8 +9,9 @@ import 'package:get/get.dart';
 import 'pick_location.dart';
 
 class AddressPage extends StatelessWidget {
-  AddressPage({Key? key}) : super(key: key);
-  final addressPickerController = Get.put(AddressPickerController());
+   AddressPage({super.key});
+  final AddressPickerController addressPickerController = Get.put(AddressPickerController());
+  final TextEditingController textController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +53,7 @@ class AddressPage extends StatelessWidget {
           const SizedBox(
             height: 10,
           ),
-          IconTextFiield(
+          IconTextField(
               icon: Icons.location_on,
               hintText: "Address",
               controller: addressPickerController.contactPersonController),
@@ -60,7 +61,7 @@ class AddressPage extends StatelessWidget {
           const SizedBox(
             height: 10,
           ),
-          IconTextFiield(
+          IconTextField(
             icon: Icons.person,
             hintText: "Name",
             controller: addressPickerController.contactPersonController,
@@ -69,10 +70,11 @@ class AddressPage extends StatelessWidget {
           const SizedBox(
             height: 10,
           ),
-          IconTextFiield(
-              icon: Icons.phone,
-              hintText: "Phone Number",
-              controller: addressPickerController),
+          IconTextField(
+            icon: Icons.phone,
+            hintText: "Phone Number",
+            controller: textController,
+          ),
         ],
       ),
     );
